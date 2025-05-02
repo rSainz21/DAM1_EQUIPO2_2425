@@ -12,4 +12,4 @@ github, es una memoria en la que se deberá hacer referencia al menos a:
 ● La valoración de lo realizado.
 ● Las mejoras propuestas.
 ● Bibliografía y webgrafía./*/
-● ESQUEMA_ E/R (https://github.com/rSainz21/DAM1_EQUIPO2_2425/blob/main/Bases%20de%20datos/diagrama_ER_FINAL.png)
+● [ESQUEMA_ E/R](https://github.com/rSainz21/DAM1_EQUIPO2_2425/blob/main/Bases%20de%20datos/diagrama_ER_FINAL.png)
