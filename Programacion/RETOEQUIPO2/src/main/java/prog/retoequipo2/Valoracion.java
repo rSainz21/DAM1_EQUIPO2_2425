@@ -129,4 +129,26 @@ private String valo_tecnica;
         this.valo_tecnica = valo_tecnica;
     }
 
+    @Override
+    public int hashCode() {
+        int hash = 3;
+        hash = 59 * hash + this.id_valoracion;
+        return hash;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        }
+        if (obj == null) {
+            return false;
+        }
+        if (getClass() != obj.getClass()) {
+            return false;
+        }
+        final Valoracion other = (Valoracion) obj;
+        return this.id_valoracion == other.id_valoracion;
+    }
+
 }

@@ -139,5 +139,27 @@ private ArrayList<Imagen> imagen;
         this.imagen = imagen;
     }
 
+    @Override
+    public int hashCode() {
+        int hash = 7;
+        hash = 47 * hash + this.id_pp;
+        return hash;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        }
+        if (obj == null) {
+            return false;
+        }
+        if (getClass() != obj.getClass()) {
+            return false;
+        }
+        final Punto_peligro other = (Punto_peligro) obj;
+        return this.id_pp == other.id_pp;
+    }
+
 
 }

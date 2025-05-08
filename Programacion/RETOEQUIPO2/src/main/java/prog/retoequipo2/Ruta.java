@@ -41,7 +41,7 @@ public class Ruta {
     private LinkedList<Resena> resenas;
     private LinkedList<Valoracion> valoraciones;
 
-    public Ruta(int id_ruta, String nombre, LocalDate fecha, double longitud_ini, double latitud_ini, double longitud_fin, double latitud_fin, int distancia_total, int duracion, double latitud_max, double longitud_max, CLASIFICACION clasificacion, int desnivel_acumulado, int tipo_terreno, int indicaciones, Actividad actividad, Periodo periodo, boolean accesible_inclusivo, boolean familiar, String url_gpx, boolean validada, String recomendaciones, String zona_geografica, Usuario creador, LinkedList<Punto_interes> puntos_interes, LinkedList<Punto_peligro> puntos_peligro, LinkedList<Resena> resenas, LinkedList<Valoracion> valoraciones) {
+    public Ruta(int id_ruta, String nombre, LocalDate fecha, double longitud_ini, double latitud_ini, double longitud_fin, double latitud_fin, int distancia_total, int duracion, double latitud_max, double longitud_max, CLASIFICACION clasificacion, int desnivel_acumulado, int tipo_terreno, int indicaciones, Actividad actividad, Periodo periodo, boolean accesible_inclusivo, boolean familiar, String url_gpx, boolean validada, String recomendaciones, String zona_geografica, Usuario creador) {
         this.id_ruta = id_ruta;
         this.nombre = nombre;
         this.fecha = fecha;
@@ -69,13 +69,13 @@ public class Ruta {
         this.zona_geografica = zona_geografica;
         this.valoracion_media = calcularValoMedia();
         this.creador = creador;
-        this.puntos_interes = puntos_interes;
-        this.puntos_peligro = puntos_peligro;
-        this.resenas = resenas;
-        this.valoraciones = valoraciones;
+        puntos_interes = new LinkedList<>();
+        puntos_peligro = new LinkedList<>();
+        resenas = new LinkedList<>();
+        valoraciones = new LinkedList<>();
     }
 
-    public Ruta(String nombre, LocalDate fecha, double longitud_ini, double latitud_ini, double longitud_fin, double latitud_fin, int distancia_total, int duracion, double latitud_max, double longitud_max, CLASIFICACION clasificacion, int nivel_esfuerzo, int desnivel_acumulado, int tipo_terreno, int indicaciones, Actividad actividad, Periodo periodo, boolean accesible_inclusivo, boolean familiar, String url_gpx, boolean validada, String recomendaciones, String zona_geografica, Usuario creador, LinkedList<Punto_interes> puntos_interes, LinkedList<Punto_peligro> puntos_peligro, LinkedList<Resena> resenas, LinkedList<Valoracion> valoraciones) {
+    public Ruta(String nombre, LocalDate fecha, double longitud_ini, double latitud_ini, double longitud_fin, double latitud_fin, int distancia_total, int duracion, double latitud_max, double longitud_max, CLASIFICACION clasificacion, int nivel_esfuerzo, int desnivel_acumulado, int tipo_terreno, int indicaciones, Actividad actividad, Periodo periodo, boolean accesible_inclusivo, boolean familiar, String url_gpx, boolean validada, String recomendaciones, String zona_geografica, Usuario creador) {
         this.nombre = nombre;
         this.fecha = fecha;
         this.longitud_ini = longitud_ini;
@@ -102,81 +102,10 @@ public class Ruta {
         this.zona_geografica = zona_geografica;
         this.valoracion_media = calcularValoMedia();
         this.creador = creador;
-        this.puntos_interes = puntos_interes;
-        this.puntos_peligro = puntos_peligro;
-        this.resenas = resenas;
-        this.valoraciones = valoraciones;
-    }
-
-    private int calcularRiesgo() {
-        int riesgo = 0;
-        int riesgoAcumulado = 0;
-        if (!puntos_peligro.isEmpty()) {
-            for (Punto_peligro p : puntos_peligro) {
-                riesgoAcumulado += p.getNivel_gravedad();
-            }
-            riesgo = Math.round((float) riesgoAcumulado / puntos_peligro.size());
-        }
-        return riesgo;
-    }
-
-    private double calcularValoMedia() {
-        double valo_media=0;
-        double valo_acumulada=0;
-        if(!this.valoraciones.isEmpty()){
-            for(Valoracion valo:valoraciones){
-                valo_acumulada+=((valo.getBelleza()+valo.getDificultad()+valo.getInteres_cultural())/3.0);
-            }
-            valo_media=valo_acumulada/valoraciones.size();
-        }
-        return valo_media;
-    }
-
-    private int calcularEsfuerzo() {
-        int esfDuracion = 0;
-        if (this.duracion < 31) {
-            esfDuracion = 2;
-        } else if (this.duracion > 30) {
-            esfDuracion = 4;
-        } else if (this.duracion > 60) {
-            esfDuracion = 6;
-        } else if (this.duracion > 120) {
-            esfDuracion = 8;
-        }
-        int esfDistancia = 0;
-        if (this.distancia_total < 5) {
-            esfDistancia = 2;
-        } else if (this.distancia_total > 5) {
-            esfDistancia = 3;
-        } else if (this.distancia_total > 10) {
-            esfDistancia = 4;
-        } else if (this.distancia_total > 15) {
-            esfDistancia = 5;
-        } else if (this.distancia_total > 20) {
-            esfDistancia = 6;
-        } else if (this.distancia_total > 25) {
-            esfDistancia = 7;
-        } else if (this.distancia_total > 30) {
-            esfDistancia = 8;
-        }
-
-        int esfDesnivel = 0;
-        if (this.desnivel_acumulado < 100) {
-            esfDesnivel = 2;
-        } else if (this.desnivel_acumulado > 100) {
-            esfDesnivel = 3;
-        } else if (this.desnivel_acumulado > 300) {
-            esfDesnivel = 4;
-        } else if (this.desnivel_acumulado > 500) {
-            esfDesnivel = 5;
-        } else if (this.desnivel_acumulado > 600) {
-            esfDesnivel = 6;
-        } else if (this.desnivel_acumulado > 800) {
-            esfDesnivel = 7;
-        } else if (this.desnivel_acumulado > 100) {
-            esfDesnivel = 8;
-        }
-        return Math.round((float) (esfDuracion + esfDistancia + esfDesnivel) / 3);
+        puntos_interes = new LinkedList<>();
+        puntos_peligro = new LinkedList<>();
+        resenas = new LinkedList<>();
+        valoraciones = new LinkedList<>();
     }
 
     public int getId_ruta() {
@@ -427,4 +356,141 @@ public class Ruta {
         this.valoracion_media = valoracion_media;
     }
 
+    private int calcularRiesgo() {
+        int riesgo = 0;
+        int riesgoAcumulado = 0;
+        if (!puntos_peligro.isEmpty()) {
+            for (Punto_peligro p : puntos_peligro) {
+                riesgoAcumulado += p.getNivel_gravedad();
+            }
+            riesgo = Math.round((float) riesgoAcumulado / puntos_peligro.size());
+        }
+        return riesgo;
+    }
+
+    private double calcularValoMedia() {
+        double valo_media = 0;
+        double valo_acumulada = 0;
+        if (!this.valoraciones.isEmpty()) {
+            for (Valoracion valo : valoraciones) {
+                valo_acumulada += ((valo.getBelleza() + valo.getDificultad() + valo.getInteres_cultural()) / 3.0);
+            }
+            valo_media = valo_acumulada / valoraciones.size();
+        }
+        return valo_media;
+    }
+
+    private int calcularEsfuerzo() {
+        int esfDuracion = 0;
+        if (this.duracion < 31) {
+            esfDuracion = 2;
+        } else if (this.duracion > 30) {
+            esfDuracion = 4;
+        } else if (this.duracion > 60) {
+            esfDuracion = 6;
+        } else if (this.duracion > 120) {
+            esfDuracion = 8;
+        }
+        int esfDistancia = 0;
+        if (this.distancia_total < 5) {
+            esfDistancia = 2;
+        } else if (this.distancia_total > 5) {
+            esfDistancia = 3;
+        } else if (this.distancia_total > 10) {
+            esfDistancia = 4;
+        } else if (this.distancia_total > 15) {
+            esfDistancia = 5;
+        } else if (this.distancia_total > 20) {
+            esfDistancia = 6;
+        } else if (this.distancia_total > 25) {
+            esfDistancia = 7;
+        } else if (this.distancia_total > 30) {
+            esfDistancia = 8;
+        }
+
+        int esfDesnivel = 0;
+        if (this.desnivel_acumulado < 100) {
+            esfDesnivel = 2;
+        } else if (this.desnivel_acumulado > 100) {
+            esfDesnivel = 3;
+        } else if (this.desnivel_acumulado > 300) {
+            esfDesnivel = 4;
+        } else if (this.desnivel_acumulado > 500) {
+            esfDesnivel = 5;
+        } else if (this.desnivel_acumulado > 600) {
+            esfDesnivel = 6;
+        } else if (this.desnivel_acumulado > 800) {
+            esfDesnivel = 7;
+        } else if (this.desnivel_acumulado > 100) {
+            esfDesnivel = 8;
+        }
+        return Math.round((float) (esfDuracion + esfDistancia + esfDesnivel) / 3);
+    }
+
+    public boolean insertaPuntoInteres(Punto_interes pi) {
+        boolean insertado = false;
+        if (this.puntos_interes.add(pi)) {
+            insertado = true;
+        }
+        return insertado;
+    }
+
+    public boolean insertaPuntoPeligro(Punto_peligro pp) {
+        boolean insertado = false;
+        if (this.puntos_peligro.add(pp)) {
+            insertado = true;
+        }
+        return insertado;
+    }
+
+    public boolean insertaResena(Resena resena) {
+        boolean insertada = false;
+        if (this.resenas.add(resena)) {
+            insertada = true;
+        }
+        return insertada;
+    }
+
+    public boolean insertaValoracion(Valoracion valo) {
+        boolean insertada = false;
+        if (this.valoraciones.add(valo)) {
+            insertada = true;
+        }
+        return insertada;
+    }
+
+    public boolean borraPuntoInteres(Punto_interes pi) {
+        boolean borrado = false;
+        if (this.puntos_interes.contains(pi)) {
+            puntos_interes.remove(pi);
+            borrado = true;
+        }
+        return borrado;
+    }
+
+    public boolean borraPuntoPeligro(Punto_peligro pp) {
+        boolean borrado = false;
+        if (this.puntos_peligro.contains(pp)) {
+            puntos_peligro.remove(pp);
+            borrado = true;
+        }
+        return borrado;
+    }
+
+    public boolean borraResena(Resena resena) {
+        boolean borrada = false;
+        if (this.resenas.contains(resena)) {
+            resenas.remove(resena);
+            borrada = true;
+        }
+        return borrada;
+    }
+        public boolean borraValoracion(Valoracion valo) {
+        boolean borrada = false;
+        if (this.valoraciones.contains(valo)) {
+            puntos_peligro.remove(valo);
+            borrada = true;
+        }
+        return borrada;
+    }
 }
