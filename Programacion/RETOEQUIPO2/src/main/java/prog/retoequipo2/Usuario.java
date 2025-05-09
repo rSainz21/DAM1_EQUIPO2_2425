@@ -5,32 +5,33 @@
 package prog.retoequipo2;
 
 import java.time.LocalDate;
+import java.util.List;
 
 /**
  *
  * @author DAM126
  */
-public class Usuario {
-private int id;
-private String email;
-private String nombre;
-private String apellidos;
-private String password;
-private LocalDate fecha_nac;
-private ROL rol;
-private boolean validado;
+public abstract class Usuario {
+protected int id;
+protected String email;
+protected String nombre;
+protected String apellidos;
+protected String password;
+protected LocalDate fecha_nac;
+protected ROL rol;
+protected boolean validado;
 
-    public Usuario(String email, String nombre, String apellidos, String password, LocalDate fecha_nac, ROL rol,boolean validado) {
+    public Usuario(String email, String nombre, String apellidos, String password, LocalDate fecha_nac, ROL rol) {
         this.email = email;
         this.nombre = nombre;
         this.apellidos = apellidos;
         this.password = password;
         this.fecha_nac = fecha_nac;
         this.rol = rol;
-        this.validado=validado;   
+        this.validado=false;   
     }
 
-    public Usuario(int id, String email, String nombre, String apellidos, String password, LocalDate fecha_nac, ROL rol, boolean validado) {
+    public Usuario(int id, String email, String nombre, String apellidos, String password, LocalDate fecha_nac, ROL rol) {
         this.id = id;
         this.email = email;
         this.nombre = nombre;
@@ -38,9 +39,10 @@ private boolean validado;
         this.password = password;
         this.fecha_nac = fecha_nac;
         this.rol = rol;
-        this.validado = validado;
+        this.validado = false;
+        
+        
     }
-    
 
     public int getId() {
         return id;
@@ -105,5 +107,13 @@ private boolean validado;
     public void setValidado(boolean validado) {
         this.validado = validado;
     }
+    public abstract List<String> listarPermisos();
+    public abstract void mostrarCatalogo();
 
+    
+    @Override
+    public String toString() {
+        return "Nombre de usuario: "+ nombre+" Apellidos: "+ apellidos+" Email: "+ email +" Fecha de nacimiento: " + fecha_nac + " ROL: " + rol+"\n";
+    }
+    
 }

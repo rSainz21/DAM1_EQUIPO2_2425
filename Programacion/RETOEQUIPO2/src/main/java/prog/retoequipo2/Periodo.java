@@ -18,6 +18,9 @@ private String descripcion;
         this.descripcion = descripcion;
     }
 
+    public Periodo() {
+    }
+
     public int getId_periodo() {
         return id_periodo;
     }

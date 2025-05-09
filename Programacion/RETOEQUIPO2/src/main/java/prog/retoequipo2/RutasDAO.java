@@ -19,6 +19,7 @@ import java.util.LinkedList;
 public class RutasDAO {
 
     private Connection conn = ConexionBD.getInstance().getConn();
+    private UsuarioDAO usuarioBD=new UsuarioDAO();
 
     public boolean insertarRuta(Ruta ruta) {
         boolean insertada = false;
@@ -58,43 +59,25 @@ public class RutasDAO {
         } catch (SQLException ex) {
             System.out.println(ex.getMessage());
         }
-    
-    
+        return insertada;
+    }
 
     public Ruta obtenerRutaPorId(int id) {
         Ruta nuevaruta = null;
-        String sql = "SELECT nombre,fecha,latitud_ini,longitud_ini,latitud_fin,longitud_fin,distancia,desnivel_acumulado,"
-                + "latitud_max,longitud_max,duracion,clasificacion,tipo_terreno,nivel_riesgo,nivel_esfuerzo,indicaciones,accesib_inclusiv,"
-                + "familiar,url_gpx,estado_ruta_validada,recomendaciones,zona_geografica,valo_media,usuarios_cod_usu FROM rutas WHERE id=?";
+        String sql = "SELECT id_ruta, nombre, fecha, latitud_ini, longitud_ini, latitud_fin, longitud_fin, distancia, desnivel_acumulado, "
+                + "latitud_max, longitud_max, duracion, clasificacion, tipo_terreno, indicaciones, accesib_inclusiv,"
+                + "familiar, url_gpx, estado_ruta_validada, recomendaciones, zona_geografica, usuarios_cod_usu"
+                + "FROM rutas WHERE id_ruta=?";
         try (PreparedStatement ps = conn.prepareStatement(sql);) {
             ps.setInt(1, id);
             try (ResultSet rs = ps.executeQuery();) {
                 if (rs != null && rs.next()) {
-                    nuevaruta.setId_ruta(id);
-                    nuevaruta.setNombre(rs.getString("nombre"));
-                    nuevaruta.setFecha(rs.getDate("fecha").toLocalDate());
-                    nuevaruta.setLatitud_ini(rs.getDouble("latitud_ini"));
-                    nuevaruta.setLongitud_ini(rs.getDouble("longitud_ini"));
-                    nuevaruta.setLatitud_fin(rs.getDouble("latitud_fin"));
-                    nuevaruta.setLongitud_ini(rs.getDouble("longitud_fin"));
-                    nuevaruta.setDistancia_total(rs.getInt("distancia"));
-                    nuevaruta.setDesnivel_acumulado(rs.getInt("desnivel_acumulado"));
-                    nuevaruta.setLatitud_max(rs.getDouble("latitud_max"));
-                    nuevaruta.setLongitud_max(rs.getDouble("longitud_max"));
-                    nuevaruta.setDuracion(rs.getInt("duracion"));
-                    nuevaruta.setClasificacion(CLASIFICACION.valueOf(rs.getString("clasificacion")));
-                    nuevaruta.setTipo_terreno(rs.getInt("tipo_terreno"));
-                    nuevaruta.setNivel_riesgo(rs.getInt("nivel_riesgo"));
-                    nuevaruta.setNivel_esfuerzo(rs.getInt("nivel_esfuerzo"));
-                    nuevaruta.setIndicaciones(rs.getInt("indicaciones"));
-                    nuevaruta.setAccesible_inclusivo(rs.getBoolean("accesib_inclusiv"));
-                    nuevaruta.setFamiliar(rs.getBoolean("familiar"));
-                    nuevaruta.setUrl_gpx(rs.getString("url_gpx"));
-                    nuevaruta.setValidada(rs.getBoolean("estado_ruta_validada"));
-                    nuevaruta.setRecomendaciones(rs.getString("recomendaciones"));
-                    nuevaruta.setZona_geografica(rs.getString("zona_geografica"));
-                    nuevaruta.setValoracion_media(rs.getDouble("valo_media"));
-                    nuevaruta.setCreador(obtenerUsuarioPorId());
+                    Usuario usu =usuarioBD.obtenerUsuarioCreador(id);
+                    nuevaruta = new Ruta(id, rs.getString("nombre"), rs.getDate("fecha").toLocalDate(), rs.getDouble("longitud_ini"), rs.getDouble("latitud_ini"),
+                            rs.getDouble("longitud_fin"), rs.getDouble("latitud_fin"), rs.getInt("distancia"), rs.getInt("duracion"), rs.getDouble("latitud_max"), rs.getDouble("longitud_max"),
+                            CLASIFICACION.valueOf(rs.getString("clasificacion")), rs.getInt("desnivel_acumulado"), rs.getInt("tipo_terreno"), rs.getInt("indicaciones"),
+                            rs.getBoolean("accesib_inclusiv"), rs.getBoolean("familiar"), rs.getString("url_gpx"), rs.getBoolean("estado_ruta_validada"), rs.getString("recomendaciones"),
+                            rs.getString("zona_geografica"), usu);
                 }
             }
         } catch (SQLException ex) {
@@ -110,13 +93,12 @@ public class RutasDAO {
             try (ResultSet rs = st.executeQuery(sql)) {
                 if (rs != null) {
                     while (rs.next()) {
-                        Ruta ruta = new Ruta(rs.getInt("id_ruta"), rs.getString("nombre"), rs.getDate("fecha").toLocalDate(), rs.getDouble("latitud_ini"),
-                                rs.getDouble("longitud_ini"), rs.getDouble("latitud_fin"), rs.getDouble("longitud_fin"), rs.getInt("distancia"),
-                                rs.getInt("desnivel_acumulado"), rs.getDouble("latitud_max"), rs.getDouble("longitud_max"), rs.getInt("duracion"),
-                                CLASIFICACION.valueOf(rs.getString("clasificacion")), rs.getInt("tipo_terreno"), rs.getInt("nivel_riesgo"),
-                                rs.getInt("nivel_esfuerzo"), rs.getInt("indicaciones"), rs.getInt("indicaciones"), rs.getBoolean("accesib_inclusiv"),
-                                rs.getBoolean("familiar"), rs.getString("url_gpx"), rs.getBoolean("estado_ruta_validada"), rs.getString("recomendaciones"),
-                                rs.getString("zona_geografica"), rs.getDouble("valo_media"), obtenerUsuarioPorId();
+                        Usuario usu = usuarioBD.obtenerUsuarioCreador(rs.getInt("id_ruta"));
+                        Ruta ruta = new Ruta(rs.getInt("id_ruta"), rs.getString("nombre"), rs.getDate("fecha").toLocalDate(), rs.getDouble("longitud_ini"), rs.getDouble("latitud_ini"),
+                                rs.getDouble("longitud_fin"), rs.getDouble("latitud_fin"), rs.getInt("distancia"), rs.getInt("duracion"), rs.getDouble("latitud_max"), rs.getDouble("longitud_max"),
+                                CLASIFICACION.valueOf(rs.getString("clasificacion")), rs.getInt("desnivel_acumulado"), rs.getInt("tipo_terreno"), rs.getInt("indicaciones"),
+                                rs.getBoolean("accesib_inclusiv"), rs.getBoolean("familiar"), rs.getString("url_gpx"), rs.getBoolean("estado_ruta_validada"), rs.getString("recomendaciones"),
+                                rs.getString("zona_geografica"), usu);
                         if (!rutas.add(ruta)) {
                             throw new Exception("fallo al insertar ruta en la lista");
                         }
@@ -176,11 +158,11 @@ public class RutasDAO {
         String sql = "DELETE FROM rutas WHERE id=?";
         try (PreparedStatement ps = conn.prepareStatement(sql);) {
             ps.setInt(1, id);
-            int resultado=ps.executeUpdate();
-            if(resultado==1){
-                borrada=true;
+            int resultado = ps.executeUpdate();
+            if (resultado == 1) {
+                borrada = true;
             }
-        }catch(SQLException ex){
+        } catch (SQLException ex) {
             System.out.println(ex.getMessage());
         }
         return borrada;

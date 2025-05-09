@@ -14,4 +14,7 @@ private String descripcion;
         this.descripcion = descripcion;
     }
 
+    public Actividad() {
+    }
+
 }

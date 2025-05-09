@@ -41,7 +41,11 @@ public class Ruta {
     private LinkedList<Resena> resenas;
     private LinkedList<Valoracion> valoraciones;
 
-    public Ruta(int id_ruta, String nombre, LocalDate fecha, double longitud_ini, double latitud_ini, double longitud_fin, double latitud_fin, int distancia_total, int duracion, double latitud_max, double longitud_max, CLASIFICACION clasificacion, int desnivel_acumulado, int tipo_terreno, int indicaciones, Actividad actividad, Periodo periodo, boolean accesible_inclusivo, boolean familiar, String url_gpx, boolean validada, String recomendaciones, String zona_geografica, Usuario creador) {
+    public Ruta(int id_ruta, String nombre, LocalDate fecha, double longitud_ini, double latitud_ini, double longitud_fin, double latitud_fin, int distancia_total, int duracion, double latitud_max, double longitud_max, CLASIFICACION clasificacion, int desnivel_acumulado, int tipo_terreno, int indicaciones, boolean accesible_inclusivo, boolean familiar, String url_gpx, boolean validada, String recomendaciones, String zona_geografica, Usuario creador) {
+                puntos_interes = new LinkedList<>();
+        puntos_peligro = new LinkedList<>();
+        resenas = new LinkedList<>();
+        valoraciones = new LinkedList<>();
         this.id_ruta = id_ruta;
         this.nombre = nombre;
         this.fecha = fecha;
@@ -59,8 +63,8 @@ public class Ruta {
         this.desnivel_acumulado = desnivel_acumulado;
         this.tipo_terreno = tipo_terreno;
         this.indicaciones = indicaciones;
-        this.actividad = actividad;
-        this.periodo = periodo;
+        this.actividad =new Actividad();
+        this.periodo = new Periodo();
         this.accesible_inclusivo = accesible_inclusivo;
         this.familiar = familiar;
         this.url_gpx = url_gpx;
@@ -69,13 +73,13 @@ public class Ruta {
         this.zona_geografica = zona_geografica;
         this.valoracion_media = calcularValoMedia();
         this.creador = creador;
+    }
+
+    public Ruta(String nombre, LocalDate fecha, double longitud_ini, double latitud_ini, double longitud_fin, double latitud_fin, int distancia_total, int duracion, double latitud_max, double longitud_max, CLASIFICACION clasificacion, int desnivel_acumulado, int tipo_terreno, int indicaciones, boolean accesible_inclusivo, boolean familiar, String url_gpx, boolean validada, String recomendaciones, String zona_geografica, Usuario creador) {
         puntos_interes = new LinkedList<>();
         puntos_peligro = new LinkedList<>();
         resenas = new LinkedList<>();
         valoraciones = new LinkedList<>();
-    }
-
-    public Ruta(String nombre, LocalDate fecha, double longitud_ini, double latitud_ini, double longitud_fin, double latitud_fin, int distancia_total, int duracion, double latitud_max, double longitud_max, CLASIFICACION clasificacion, int nivel_esfuerzo, int desnivel_acumulado, int tipo_terreno, int indicaciones, Actividad actividad, Periodo periodo, boolean accesible_inclusivo, boolean familiar, String url_gpx, boolean validada, String recomendaciones, String zona_geografica, Usuario creador) {
         this.nombre = nombre;
         this.fecha = fecha;
         this.longitud_ini = longitud_ini;
@@ -92,8 +96,8 @@ public class Ruta {
         this.desnivel_acumulado = desnivel_acumulado;
         this.tipo_terreno = tipo_terreno;
         this.indicaciones = indicaciones;
-        this.actividad = actividad;
-        this.periodo = periodo;
+        this.actividad =new Actividad();
+        this.periodo = new Periodo();
         this.accesible_inclusivo = accesible_inclusivo;
         this.familiar = familiar;
         this.url_gpx = url_gpx;
@@ -102,10 +106,7 @@ public class Ruta {
         this.zona_geografica = zona_geografica;
         this.valoracion_media = calcularValoMedia();
         this.creador = creador;
-        puntos_interes = new LinkedList<>();
-        puntos_peligro = new LinkedList<>();
-        resenas = new LinkedList<>();
-        valoraciones = new LinkedList<>();
+
     }
 
     public int getId_ruta() {
@@ -492,5 +493,5 @@ public class Ruta {
             borrada = true;
         }
         return borrada;
-    }
+    } 
 }
