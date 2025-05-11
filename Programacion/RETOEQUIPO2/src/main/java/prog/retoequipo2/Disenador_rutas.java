@@ -13,11 +13,13 @@ import java.util.List;
  * @author DAM126
  */
 public class Disenador_rutas extends Usuario{
-    public Disenador_rutas(String email, String nombre, String apellidos, String password, LocalDate fecha_nac, ROL rol){
-        super(email,nombre,apellidos,password,fecha_nac,rol);
+    public Disenador_rutas(String email, String nombre, String apellidos, String password, LocalDate fecha_nac){
+        super(email,nombre,apellidos,password,fecha_nac);
+        this.rol=ROL.DISENADOR;
     }
-    public Disenador_rutas(int id,String email, String nombre, String apellidos, String password, LocalDate fecha_nac, ROL rol){
-        super(id,email,nombre,apellidos,password,fecha_nac,rol);
+    public Disenador_rutas(int id,String email, String nombre, String apellidos, String password, LocalDate fecha_nac){
+        super(id,email,nombre,apellidos,password,fecha_nac);
+        this.rol=ROL.DISENADOR;
     }
 
     @Override

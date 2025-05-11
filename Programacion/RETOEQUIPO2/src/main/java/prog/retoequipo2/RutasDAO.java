@@ -64,10 +64,10 @@ public class RutasDAO {
 
     public Ruta obtenerRutaPorId(int id) {
         Ruta nuevaruta = null;
-        String sql = "SELECT id_ruta, nombre, fecha, latitud_ini, longitud_ini, latitud_fin, longitud_fin, distancia, desnivel_acumulado, "
+        String sql = "SELECT nombre, fecha, latitud_ini, longitud_ini, latitud_fin, longitud_fin, distancia, desnivel_acumulado, "
                 + "latitud_max, longitud_max, duracion, clasificacion, tipo_terreno, indicaciones, accesib_inclusiv,"
                 + "familiar, url_gpx, estado_ruta_validada, recomendaciones, zona_geografica, usuarios_cod_usu"
-                + "FROM rutas WHERE id_ruta=?";
+                + " FROM rutas WHERE id_ruta=?";
         try (PreparedStatement ps = conn.prepareStatement(sql);) {
             ps.setInt(1, id);
             try (ResultSet rs = ps.executeQuery();) {

@@ -10,11 +10,13 @@ import java.util.List;
 
 public class Profesor extends Usuario{
     
-public Profesor(int id,String email, String nombre, String apellidos, String password, LocalDate fecha_nac, ROL rol){
-    super(id,email,nombre,apellidos,password,fecha_nac,rol);
+public Profesor(int id,String email, String nombre, String apellidos, String password, LocalDate fecha_nac){
+    super(id,email,nombre,apellidos,password,fecha_nac);
+    this.rol=ROL.PROFESOR;
 }
-public Profesor(String email, String nombre, String apellidos, String password, LocalDate fecha_nac, ROL rol){
-    super(email,nombre,apellidos,password,fecha_nac,rol);
+public Profesor(String email, String nombre, String apellidos, String password, LocalDate fecha_nac){
+    super(email,nombre,apellidos,password,fecha_nac);
+    this.rol=ROL.PROFESOR;
 }
 
     @Override

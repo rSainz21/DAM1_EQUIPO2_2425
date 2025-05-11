@@ -21,24 +21,22 @@ protected LocalDate fecha_nac;
 protected ROL rol;
 protected boolean validado;
 
-    public Usuario(String email, String nombre, String apellidos, String password, LocalDate fecha_nac, ROL rol) {
+    public Usuario(String email, String nombre, String apellidos, String password, LocalDate fecha_nac) {
         this.email = email;
         this.nombre = nombre;
         this.apellidos = apellidos;
         this.password = password;
         this.fecha_nac = fecha_nac;
-        this.rol = rol;
         this.validado=false;   
     }
 
-    public Usuario(int id, String email, String nombre, String apellidos, String password, LocalDate fecha_nac, ROL rol) {
+    public Usuario(int id, String email, String nombre, String apellidos, String password, LocalDate fecha_nac) {
         this.id = id;
         this.email = email;
         this.nombre = nombre;
         this.apellidos = apellidos;
         this.password = password;
         this.fecha_nac = fecha_nac;
-        this.rol = rol;
         this.validado = false;
         
         

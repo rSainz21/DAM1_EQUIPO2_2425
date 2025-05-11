@@ -5,10 +5,11 @@
 package prog.retoequipo2;
 
 import java.sql.Connection;
+import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.time.LocalDate;
+import java.sql.Statement;
 
 /**
  *
@@ -17,6 +18,27 @@ import java.time.LocalDate;
 public class UsuarioDAO {
 
     private Connection conn = ConexionBD.getInstance().getConn();
+
+    public boolean insertaUsuario(Usuario usu) {
+        boolean insertado = false;
+        String sql = "INSERT INTO usuarios (email,nombre,apellidos,password,fecha_nac,rol,validado) VALUES (?,?,?,?,?,?,?)";
+        try (PreparedStatement ps = conn.prepareStatement(sql);) {
+            ps.setString(1, usu.getEmail());
+            ps.setString(2, usu.getNombre());
+            ps.setString(3, usu.getApellidos());
+            ps.setString(4, usu.getPassword());
+            ps.setDate(5, Date.valueOf(usu.getFecha_nac()));
+            ps.setString(6, usu.getRol().toString());
+            ps.setBoolean(7, usu.isValidado());
+            int resultado = ps.executeUpdate();
+            if (resultado == 1) {
+                insertado = true;
+            }
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+        }
+        return insertado;
+    }
 
     public Usuario obtenerUsuarioPorId(int id) {
         Usuario usu = null;
@@ -28,20 +50,16 @@ public class UsuarioDAO {
                     String rol = rs.getString("rol").toUpperCase();
                     switch (rol) {
                         case "ADMINISTRADOR" -> {
-                            usu = new Administrador(rs.getInt("cod_usu"), rs.getString("email"), rs.getString("nombre"), rs.getString("apellidos"), rs.getString("password"), rs.getDate("fecha_nac").toLocalDate(),
-                                    ROL.valueOf(rol));
+                            usu = new Administrador(rs.getInt("cod_usu"), rs.getString("email"), rs.getString("nombre"), rs.getString("apellidos"), rs.getString("password"), rs.getDate("fecha_nac").toLocalDate());
                         }
                         case "DISENADOR" -> {
-                            usu = new Disenador_rutas(rs.getInt("cod_usu"), rs.getString("email"), rs.getString("nombre"), rs.getString("apellidos"), rs.getString("password"), rs.getDate("fecha_nac").toLocalDate(),
-                                    ROL.valueOf(rol));
+                            usu = new Disenador_rutas(rs.getInt("cod_usu"), rs.getString("email"), rs.getString("nombre"), rs.getString("apellidos"), rs.getString("password"), rs.getDate("fecha_nac").toLocalDate());
                         }
                         case "PROFESOR" -> {
-                            usu = new Profesor(rs.getInt("cod_usu"), rs.getString("email"), rs.getString("nombre"), rs.getString("apellidos"), rs.getString("password"), rs.getDate("fecha_nac").toLocalDate(),
-                                    ROL.valueOf(rol));
+                            usu = new Profesor(rs.getInt("cod_usu"), rs.getString("email"), rs.getString("nombre"), rs.getString("apellidos"), rs.getString("password"), rs.getDate("fecha_nac").toLocalDate());
                         }
                         case "ALUMNO" -> {
-                            usu = new Alumno(rs.getInt("cod_usu"), rs.getString("email"), rs.getString("nombre"), rs.getString("apellidos"), rs.getString("password"), rs.getDate("fecha_nac").toLocalDate(),
-                                    ROL.valueOf(rol));
+                            usu = new Alumno(rs.getInt("cod_usu"), rs.getString("email"), rs.getString("nombre"), rs.getString("apellidos"), rs.getString("password"), rs.getDate("fecha_nac").toLocalDate());
                         }
                     }
                 }
@@ -62,20 +80,16 @@ public class UsuarioDAO {
                     String rol = rs.getString("rol").toUpperCase();
                     switch (rol) {
                         case "ADMINISTRADOR" -> {
-                            usu = new Administrador(rs.getInt("cod_usu"), rs.getString("email"), rs.getString("nombre"), rs.getString("apellidos"), rs.getString("password"), rs.getDate("fecha_nac").toLocalDate(),
-                                    ROL.valueOf(rol));
+                            usu = new Administrador(rs.getInt("cod_usu"), rs.getString("email"), rs.getString("nombre"), rs.getString("apellidos"), rs.getString("password"), rs.getDate("fecha_nac").toLocalDate());
                         }
                         case "DISENADOR" -> {
-                            usu = new Disenador_rutas(rs.getInt("cod_usu"), rs.getString("email"), rs.getString("nombre"), rs.getString("apellidos"), rs.getString("password"), rs.getDate("fecha_nac").toLocalDate(),
-                                    ROL.valueOf(rol));
+                            usu = new Disenador_rutas(rs.getInt("cod_usu"), rs.getString("email"), rs.getString("nombre"), rs.getString("apellidos"), rs.getString("password"), rs.getDate("fecha_nac").toLocalDate());
                         }
                         case "PROFESOR" -> {
-                            usu = new Profesor(rs.getInt("cod_usu"), rs.getString("email"), rs.getString("nombre"), rs.getString("apellidos"), rs.getString("password"), rs.getDate("fecha_nac").toLocalDate(),
-                                    ROL.valueOf(rol));
+                            usu = new Profesor(rs.getInt("cod_usu"), rs.getString("email"), rs.getString("nombre"), rs.getString("apellidos"), rs.getString("password"), rs.getDate("fecha_nac").toLocalDate());
                         }
                         case "ALUMNO" -> {
-                            usu = new Alumno(rs.getInt("cod_usu"), rs.getString("email"), rs.getString("nombre"), rs.getString("apellidos"), rs.getString("password"), rs.getDate("fecha_nac").toLocalDate(),
-                                    ROL.valueOf(rol));
+                            usu = new Alumno(rs.getInt("cod_usu"), rs.getString("email"), rs.getString("nombre"), rs.getString("apellidos"), rs.getString("password"), rs.getDate("fecha_nac").toLocalDate());
                         }
                     }
                 }
@@ -85,4 +99,39 @@ public class UsuarioDAO {
         }
         return usu;
     }
+    public boolean borrarUsuario(int id){
+        boolean borrado=false;
+        String sql="DELETE FROM USUARIOS WHERE cod_usu=?";
+        try(PreparedStatement ps=conn.prepareStatement(sql);){
+            ps.setInt(1, id);
+            int resultado=ps.executeUpdate();
+            if(resultado==1){
+                borrado=true;
+            }
+        }catch (SQLException ex) {
+            System.out.println(ex.getMessage());
+        }
+        return borrado;
+    }
+    public boolean modificarUsuario(Usuario usu){
+        boolean modificado=false;
+        String sql="UPDATE USUARIOS SET email=?, nombre=?, apellidos=?, password=?, fecha_nac=?, rol=?, validado=?";
+        try(PreparedStatement ps=conn.prepareStatement(sql);){
+            ps.setString(1, usu.getEmail());
+            ps.setString(2, usu.getNombre());
+            ps.setString(3, usu.getApellidos());
+            ps.setString(4, usu.getPassword());
+            ps.setDate(5, Date.valueOf(usu.getFecha_nac()));
+            ps.setString(6, usu.getRol().toString());
+            ps.setBoolean(7, usu.isValidado());
+            int resultado=ps.executeUpdate();
+            if(resultado==1){
+                modificado=true;
+            }
+        }catch (SQLException ex) {
+            System.out.println(ex.getMessage());
+        }
+        return modificado;
+    }
+    
 }

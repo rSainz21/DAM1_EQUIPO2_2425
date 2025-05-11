@@ -6,6 +6,7 @@ package prog.retoequipo2;
 
 import java.time.LocalDate;
 import java.util.LinkedList;
+import java.util.TreeSet;
 
 public class Ruta {
 
@@ -36,14 +37,12 @@ public class Ruta {
     private String zona_geografica;
     private double valoracion_media;
     private Usuario creador;
-    private LinkedList<Punto_interes> puntos_interes;
-    private LinkedList<Punto_peligro> puntos_peligro;
+    private TreeSet<Puntos_ruta> puntos_ruta;
     private LinkedList<Resena> resenas;
     private LinkedList<Valoracion> valoraciones;
 
     public Ruta(int id_ruta, String nombre, LocalDate fecha, double longitud_ini, double latitud_ini, double longitud_fin, double latitud_fin, int distancia_total, int duracion, double latitud_max, double longitud_max, CLASIFICACION clasificacion, int desnivel_acumulado, int tipo_terreno, int indicaciones, boolean accesible_inclusivo, boolean familiar, String url_gpx, boolean validada, String recomendaciones, String zona_geografica, Usuario creador) {
-                puntos_interes = new LinkedList<>();
-        puntos_peligro = new LinkedList<>();
+                puntos_ruta = new TreeSet<>();
         resenas = new LinkedList<>();
         valoraciones = new LinkedList<>();
         this.id_ruta = id_ruta;
@@ -76,8 +75,7 @@ public class Ruta {
     }
 
     public Ruta(String nombre, LocalDate fecha, double longitud_ini, double latitud_ini, double longitud_fin, double latitud_fin, int distancia_total, int duracion, double latitud_max, double longitud_max, CLASIFICACION clasificacion, int desnivel_acumulado, int tipo_terreno, int indicaciones, boolean accesible_inclusivo, boolean familiar, String url_gpx, boolean validada, String recomendaciones, String zona_geografica, Usuario creador) {
-        puntos_interes = new LinkedList<>();
-        puntos_peligro = new LinkedList<>();
+        puntos_ruta = new TreeSet<>();
         resenas = new LinkedList<>();
         valoraciones = new LinkedList<>();
         this.nombre = nombre;
@@ -301,20 +299,12 @@ public class Ruta {
         this.creador = creador;
     }
 
-    public LinkedList<Punto_interes> getPuntos_interes() {
-        return puntos_interes;
+    public TreeSet<Puntos_ruta> getPuntos_ruta() {
+        return puntos_ruta;
     }
 
-    public void setPuntos_interes(LinkedList<Punto_interes> puntos_interes) {
-        this.puntos_interes = puntos_interes;
-    }
-
-    public LinkedList<Punto_peligro> getPuntos_peligro() {
-        return puntos_peligro;
-    }
-
-    public void setPuntos_peligro(LinkedList<Punto_peligro> puntos_peligro) {
-        this.puntos_peligro = puntos_peligro;
+    public void setPuntos_ruta(TreeSet<Puntos_ruta> puntos_ruta) {
+        this.puntos_ruta = puntos_ruta;
     }
 
     public LinkedList<Resena> getResenas() {
@@ -360,11 +350,15 @@ public class Ruta {
     private int calcularRiesgo() {
         int riesgo = 0;
         int riesgoAcumulado = 0;
-        if (!puntos_peligro.isEmpty()) {
-            for (Punto_peligro p : puntos_peligro) {
-                riesgoAcumulado += p.getNivel_gravedad();
+        int pps=0;
+        if (!puntos_ruta.isEmpty()) {
+            for (Puntos_ruta p : puntos_ruta) {
+                if(p instanceof Punto_peligro){
+                riesgoAcumulado += ((Punto_peligro) p).getNivel_gravedad();
+                pps++;
             }
-            riesgo = Math.round((float) riesgoAcumulado / puntos_peligro.size());
+            }
+            riesgo = Math.round((float) riesgoAcumulado / pps);
         }
         return riesgo;
     }
@@ -428,17 +422,9 @@ public class Ruta {
         return Math.round((float) (esfDuracion + esfDistancia + esfDesnivel) / 3);
     }
 
-    public boolean insertaPuntoInteres(Punto_interes pi) {
+    public boolean insertaPuntosRuta(Puntos_ruta pr) {
         boolean insertado = false;
-        if (this.puntos_interes.add(pi)) {
-            insertado = true;
-        }
-        return insertado;
-    }
-
-    public boolean insertaPuntoPeligro(Punto_peligro pp) {
-        boolean insertado = false;
-        if (this.puntos_peligro.add(pp)) {
+        if (this.puntos_ruta.add(pr)) {
             insertado = true;
         }
         return insertado;
@@ -460,23 +446,15 @@ public class Ruta {
         return insertada;
     }
 
-    public boolean borraPuntoInteres(Punto_interes pi) {
+    public boolean borraPuntoRuta(Puntos_ruta pr) {
         boolean borrado = false;
-        if (this.puntos_interes.contains(pi)) {
-            puntos_interes.remove(pi);
+        if (this.puntos_ruta.contains(pr)) {
+            puntos_ruta.remove(pr);
             borrado = true;
         }
         return borrado;
     }
 
-    public boolean borraPuntoPeligro(Punto_peligro pp) {
-        boolean borrado = false;
-        if (this.puntos_peligro.contains(pp)) {
-            puntos_peligro.remove(pp);
-            borrado = true;
-        }
-        return borrado;
-    }
 
     public boolean borraResena(Resena resena) {
         boolean borrada = false;
@@ -489,7 +467,7 @@ public class Ruta {
         public boolean borraValoracion(Valoracion valo) {
         boolean borrada = false;
         if (this.valoraciones.contains(valo)) {
-            puntos_peligro.remove(valo);
+            valoraciones.remove(valo);
             borrada = true;
         }
         return borrada;
