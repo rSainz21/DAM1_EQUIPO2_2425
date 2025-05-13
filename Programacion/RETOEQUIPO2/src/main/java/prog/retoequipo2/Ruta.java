@@ -41,8 +41,8 @@ public class Ruta {
     private LinkedList<Resena> resenas;
     private LinkedList<Valoracion> valoraciones;
 
-    public Ruta(int id_ruta, String nombre, LocalDate fecha, double longitud_ini, double latitud_ini, double longitud_fin, double latitud_fin, int distancia_total, int duracion, double latitud_max, double longitud_max, CLASIFICACION clasificacion, int desnivel_acumulado, int tipo_terreno, int indicaciones, boolean accesible_inclusivo, boolean familiar, String url_gpx, boolean validada, String recomendaciones, String zona_geografica, Usuario creador) {
-                puntos_ruta = new TreeSet<>();
+    public Ruta(int id_ruta, String nombre, LocalDate fecha, double longitud_ini, double latitud_ini, double longitud_fin, double latitud_fin, int distancia_total, int duracion, double latitud_max, double longitud_max, CLASIFICACION clasificacion, int desnivel_acumulado, int tipo_terreno, int indicaciones, boolean accesible_inclusivo, boolean familiar, String url_gpx, String recomendaciones, String zona_geografica, Usuario creador) {
+        puntos_ruta = new TreeSet<>();
         resenas = new LinkedList<>();
         valoraciones = new LinkedList<>();
         this.id_ruta = id_ruta;
@@ -67,14 +67,14 @@ public class Ruta {
         this.accesible_inclusivo = accesible_inclusivo;
         this.familiar = familiar;
         this.url_gpx = url_gpx;
-        this.validada = validada;
+        this.validada = false;
         this.recomendaciones = recomendaciones;
         this.zona_geografica = zona_geografica;
         this.valoracion_media = calcularValoMedia();
         this.creador = creador;
     }
 
-    public Ruta(String nombre, LocalDate fecha, double longitud_ini, double latitud_ini, double longitud_fin, double latitud_fin, int distancia_total, int duracion, double latitud_max, double longitud_max, CLASIFICACION clasificacion, int desnivel_acumulado, int tipo_terreno, int indicaciones, boolean accesible_inclusivo, boolean familiar, String url_gpx, boolean validada, String recomendaciones, String zona_geografica, Usuario creador) {
+    public Ruta(String nombre, LocalDate fecha, double longitud_ini, double latitud_ini, double longitud_fin, double latitud_fin, int distancia_total, int duracion, double latitud_max, double longitud_max, CLASIFICACION clasificacion, int desnivel_acumulado, int tipo_terreno, int indicaciones, boolean accesible_inclusivo, boolean familiar, String url_gpx, String recomendaciones, String zona_geografica, Usuario creador) {
         puntos_ruta = new TreeSet<>();
         resenas = new LinkedList<>();
         valoraciones = new LinkedList<>();
@@ -99,7 +99,7 @@ public class Ruta {
         this.accesible_inclusivo = accesible_inclusivo;
         this.familiar = familiar;
         this.url_gpx = url_gpx;
-        this.validada = validada;
+        this.validada = false;
         this.recomendaciones = recomendaciones;
         this.zona_geografica = zona_geografica;
         this.valoracion_media = calcularValoMedia();

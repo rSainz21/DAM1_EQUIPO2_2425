@@ -5,8 +5,6 @@
 package prog.retoequipo2;
 
 import java.time.LocalDate;
-import java.util.Arrays;
-import java.util.List;
 
 public class Profesor extends Usuario{
     
@@ -18,27 +16,4 @@ public Profesor(String email, String nombre, String apellidos, String password, 
     super(email,nombre,apellidos,password,fecha_nac);
     this.rol=ROL.PROFESOR;
 }
-
-    @Override
-    public List<String> listarPermisos() {
-List<String>permisos=Arrays.asList("VER_RUTAS","VALORAR_RUTAS","RESENAR_RUTAS","CREAR_RUTAS","DESCARGAR_FICHAS","CREAR_CALENDARIO");
-        return permisos;
-        }
-
-    @Override
-    public void mostrarCatalogo() {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
-    }
-    public void crearRuta(){
-       
-   }
-   public void descargarFichas(Ruta ruta){
-       
-   }
-    public void crearCalendario(){
-        
-    }
-    public void modificarCalendario(){
-        
-    }
 }

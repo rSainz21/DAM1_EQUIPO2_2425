@@ -113,8 +113,8 @@ public class MetodosDAO {
 
     public boolean insertarPuntoPeligro(Punto_peligro pp, Ruta ruta) {
         boolean insertado = false;
-        String sql = "INSERT INTO puntospeligro (nombre,num_orden,latitud,longitud,timestamp,tipo,descripcion,km,nivel_gravedad,descripcion_gravedad,rutas_id_ruta)"
-                + " VALUES (?,?,?,?,?,?,?,?,?)";
+        String sql = "INSERT INTO puntospeligro (nombre,num_orden,latitud,longitud,timestamp,descripcion,km,nivel_gravedad,descripcion_gravedad,rutas_id_ruta)"
+                + " VALUES (?,?,?,?,?,?,?,?,?,?)";
         try (PreparedStatement ps = conn.prepareStatement(sql);) {
             ps.setString(1, pp.getNombre());
             ps.setInt(2, pp.getNum_orden());

@@ -21,21 +21,4 @@ public class Disenador_rutas extends Usuario{
         super(id,email,nombre,apellidos,password,fecha_nac);
         this.rol=ROL.DISENADOR;
     }
-
-    @Override
-    public List<String> listarPermisos() {
-     List<String>permisos=Arrays.asList("VER_RUTAS","VALORAR_RUTAS","RESENAR_RUTAS","CREAR_RUTAS","DESCARGAR_FICHAS");
-     return permisos;
-    }
-
-    @Override
-    public void mostrarCatalogo() {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
-    }
-   public void crearRuta(){
-       
-   }
-   public void descargarFichas(Ruta ruta){
-       
-   }
 }

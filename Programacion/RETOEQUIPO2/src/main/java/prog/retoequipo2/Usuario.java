@@ -105,10 +105,6 @@ protected boolean validado;
     public void setValidado(boolean validado) {
         this.validado = validado;
     }
-    public abstract List<String> listarPermisos();
-    public abstract void mostrarCatalogo();
-
-    
     @Override
     public String toString() {
         return "Nombre de usuario: "+ nombre+" Apellidos: "+ apellidos+" Email: "+ email +" Fecha de nacimiento: " + fecha_nac + " ROL: " + rol+"\n";
