@@ -10,6 +10,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Timestamp;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.LinkedList;
 import java.util.TreeSet;
@@ -280,21 +281,22 @@ public class MetodosDAO {
 
     public boolean insertaValoracion(Valoracion valo) {
         boolean insertada = false;
-        String sql = "INSERT INTO valoraciones (dificultad, belleza, interes_cultu, texto_valo, es_valo_tecnica, "
-                + "texto_valo_tecnica, rutas_id_ruta, usuarios_cod_usu) VALUES (?,?,?,?,?,?,?,?)";
+        String sql = "INSERT INTO valoraciones (dificultad, belleza, interes_cultu, texto_valo, fecha, es_valo_tecnica, "
+                + "texto_valo_tecnica, rutas_id_ruta, usuarios_cod_usu) VALUES (?,?,?,?,?,?,?,?,?)";
         try (PreparedStatement ps = conn.prepareStatement(sql);) {
             ps.setInt(1, valo.getDificultad());
             ps.setInt(2, valo.getBelleza());
             ps.setInt(3, valo.getInteres_cultural());
             ps.setString(4, valo.getTexto_valo());
-            ps.setBoolean(5, valo.isEsTecnica());
+            ps.setDate(5, Date.valueOf(valo.getFecha_valoracion()));
+            ps.setBoolean(6, valo.isEsTecnica());
             if (valo.isEsTecnica()) {
-                ps.setString(6, valo.getValo_tecnica());
+                ps.setString(7, valo.getValo_tecnica());
             } else {
-                ps.setString(6, "");
+                ps.setString(7, "");
             }
-            ps.setInt(7, valo.getRuta().getId_ruta());
-            ps.setInt(8, valo.getUsuario().getId());
+            ps.setInt(8, valo.getRuta().getId_ruta());
+            ps.setInt(9, valo.getUsuario().getId());
             int resultado = ps.executeUpdate();
             if (resultado == 1) {
                 insertada = true;

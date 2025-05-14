@@ -117,7 +117,7 @@ public class RutasDAO {
         boolean modificada = false;
         String sql = "UPDATE rutas SET nombre=?,fecha=?,latitud_ini=?,longitud_ini=?,latitud_fin=?,longitud_fin=?,distancia=?,desnivel_acumulado=?,"
                 + "latitud_max=?,longitud_max=?,duracion=?,clasificacion=?,tipo_terreno=?,nivel_riesgo=?,nivel_esfuerzo=?,indicaciones=?,accesib_inclusiv=?,"
-                + "familiar=?,url_gpx=?,estado_ruta_validada=?,recomendaciones=?,zona_geografica=?,valo_media=?,usuarios_cod_usu=? WHERE id=?";
+                + "familiar=?,url_gpx=?,estado_ruta_validada=?,recomendaciones=?,zona_geografica=?,valo_media=?,usuarios_cod_usu=? WHERE id_ruta=?";
         try (PreparedStatement ps = conn.prepareStatement(sql);) {
             ps.setString(1, ruta.getNombre());
             ps.setDate(2, Date.valueOf(ruta.getFecha()));
@@ -143,6 +143,7 @@ public class RutasDAO {
             ps.setString(22, ruta.getZona_geografica());
             ps.setDouble(23, ruta.getValoracion_media());
             ps.setInt(24, ruta.getCreador().getId());
+            ps.setInt(25, ruta.getId_ruta());
             int resultado = ps.executeUpdate();
             if (resultado == 1) {
                 modificada = true;
@@ -155,7 +156,7 @@ public class RutasDAO {
 
     public boolean borrarRuta(int id) {
         boolean borrada = false;
-        String sql = "DELETE FROM rutas WHERE id=?";
+        String sql = "DELETE FROM rutas WHERE id_ruta=?";
         try (PreparedStatement ps = conn.prepareStatement(sql);) {
             ps.setInt(1, id);
             int resultado = ps.executeUpdate();
@@ -200,6 +201,25 @@ public class RutasDAO {
             System.out.println(ex.getMessage());
         }
         return noValidadas;
+    }
+    
+    public LinkedList<Ruta> rutasValidadas() {
+        LinkedList<Ruta> validadas = new LinkedList<>();
+        String sql = "SELECT * FROM rutas WHERE estado_ruta_validada=TRUE;";
+        try (Statement stt = conn.createStatement(); ResultSet rs = stt.executeQuery(sql)) {
+            while (rs.next()) {
+                Usuario usu = usuarioBD.obtenerUsuarioCreador(rs.getInt("id_ruta"));
+                Ruta ruta = new Ruta(rs.getInt("id_ruta"), rs.getString("nombre"), rs.getDate("fecha").toLocalDate(), rs.getDouble("longitud_ini"), rs.getDouble("latitud_ini"),
+                        rs.getDouble("longitud_fin"), rs.getDouble("latitud_fin"), rs.getInt("distancia"), rs.getInt("duracion"), rs.getDouble("latitud_max"), rs.getDouble("longitud_max"),
+                        CLASIFICACION.valueOf(rs.getString("clasificacion")), rs.getInt("desnivel_acumulado"), rs.getInt("tipo_terreno"), rs.getInt("indicaciones"),
+                        rs.getBoolean("accesib_inclusiv"), rs.getBoolean("familiar"), rs.getString("url_gpx"), rs.getString("recomendaciones"),
+                        rs.getString("zona_geografica"), usu);
+                validadas.add(ruta);
+            }
+        } catch (SQLException ex) {
+            System.out.println(ex.getMessage());
+        }
+        return validadas;
     }
 
 }
