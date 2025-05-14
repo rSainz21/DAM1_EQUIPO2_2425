@@ -4,9 +4,9 @@ package prog.retoequipo2;
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
-
 import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.LinkedList;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
@@ -56,6 +56,7 @@ public class PantallaPrincipal extends javax.swing.JFrame {
         btnVolverVerRutas = new javax.swing.JButton();
         btnBorrarRuta = new javax.swing.JButton();
         btnModificaRuta = new javax.swing.JButton();
+        FiltroOrdenaCombo = new javax.swing.JComboBox<>();
         PantallaRegistro = new javax.swing.JPanel();
         textUsuario = new javax.swing.JTextField();
         btnEnviarInicioSesion = new javax.swing.JButton();
@@ -227,6 +228,13 @@ public class PantallaPrincipal extends javax.swing.JFrame {
             }
         });
 
+        FiltroOrdenaCombo.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Riesgo", "Duracion", "Distancia", "Tipo" }));
+        FiltroOrdenaCombo.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                FiltroOrdenaComboActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout PantallaVerRutasLayout = new javax.swing.GroupLayout(PantallaVerRutas);
         PantallaVerRutas.setLayout(PantallaVerRutasLayout);
         PantallaVerRutasLayout.setHorizontalGroup(
@@ -235,7 +243,8 @@ public class PantallaPrincipal extends javax.swing.JFrame {
                 .addGap(39, 39, 39)
                 .addGroup(PantallaVerRutasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(PantallaVerRutasLayout.createSequentialGroup()
-                        .addGap(106, 106, 106)
+                        .addComponent(FiltroOrdenaCombo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(34, 34, 34)
                         .addComponent(jScrollPane1))
                     .addGroup(PantallaVerRutasLayout.createSequentialGroup()
                         .addComponent(btnVolverVerRutas)
@@ -253,7 +262,9 @@ public class PantallaPrincipal extends javax.swing.JFrame {
             PantallaVerRutasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(PantallaVerRutasLayout.createSequentialGroup()
                 .addGap(19, 19, 19)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 388, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(PantallaVerRutasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 388, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(FiltroOrdenaCombo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(PantallaVerRutasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnResena)
@@ -396,7 +407,8 @@ public class PantallaPrincipal extends javax.swing.JFrame {
 
         getContentPane().add(PantallaMenu, "card5");
 
-        TablaRutasNoValidadas.setBorder(javax.swing.BorderFactory.createTitledBorder("Rutas no validadas"));
+        PantallaValidarRutas.setBorder(javax.swing.BorderFactory.createTitledBorder("Rutas no validadas"));
+
         jScrollPane2.setViewportView(TablaRutasNoValidadas);
 
         btnValidaRUTA.setText("Validar");
@@ -418,25 +430,25 @@ public class PantallaPrincipal extends javax.swing.JFrame {
         PantallaValidarRutasLayout.setHorizontalGroup(
             PantallaValidarRutasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(PantallaValidarRutasLayout.createSequentialGroup()
-                .addContainerGap(74, Short.MAX_VALUE)
-                .addGroup(PantallaValidarRutasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                .addContainerGap(69, Short.MAX_VALUE)
+                .addGroup(PantallaValidarRutasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(jScrollPane2)
                     .addGroup(PantallaValidarRutasLayout.createSequentialGroup()
                         .addComponent(btnVolverValidaRutas)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(btnValidaRUTA))
-                    .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 748, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(77, Short.MAX_VALUE))
+                        .addGap(604, 604, 604)
+                        .addComponent(btnValidaRUTA)))
+                .addContainerGap(72, Short.MAX_VALUE))
         );
         PantallaValidarRutasLayout.setVerticalGroup(
             PantallaValidarRutasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(PantallaValidarRutasLayout.createSequentialGroup()
-                .addGap(31, 31, 31)
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 414, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(58, 58, 58)
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 387, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(PantallaValidarRutasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnValidaRUTA)
                     .addComponent(btnVolverValidaRutas))
-                .addContainerGap(36, Short.MAX_VALUE))
+                .addContainerGap(13, Short.MAX_VALUE))
         );
 
         getContentPane().add(PantallaValidarRutas, "card6");
@@ -1302,6 +1314,8 @@ public class PantallaPrincipal extends javax.swing.JFrame {
                     accesible_inclusivo, familiar, url, recomendaciones, zonaGeo, user);
             if (!rutas.insertarRuta(ruta)) {
                 JOptionPane.showMessageDialog(null, "Fallo al insertar ruta", "ERROR", JOptionPane.ERROR_MESSAGE);
+            } else {
+                JOptionPane.showMessageDialog(null, "Ruta añadida correctamente", "ERROR", JOptionPane.INFORMATION_MESSAGE);
             }
         } catch (NumberFormatException e) {
             JOptionPane.showMessageDialog(null, "Valor incorrecto", "", JOptionPane.ERROR_MESSAGE);
@@ -1474,14 +1488,25 @@ public class PantallaPrincipal extends javax.swing.JFrame {
     }//GEN-LAST:event_btnResenaActionPerformed
 
     private void btnSubmitResenaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSubmitResenaActionPerformed
-    String resenatxt=txtResena.getText();
-    Resena resena=new Resena(ruta,user,resenatxt);
-    if(metodos.insertaResena(resena)){
-        JOptionPane.showMessageDialog(null, "Reseña añadida", "", JOptionPane.INFORMATION_MESSAGE);
-    }else{
-        JOptionPane.showMessageDialog(null, "Fallo al añadir reseña", "ERROR", JOptionPane.ERROR_MESSAGE);
-    }
+        String resenatxt = txtResena.getText();
+        Resena resena = new Resena(ruta, user, resenatxt);
+        if (metodos.insertaResena(resena)) {
+            JOptionPane.showMessageDialog(null, "Reseña añadida", "", JOptionPane.INFORMATION_MESSAGE);
+        } else {
+            JOptionPane.showMessageDialog(null, "Fallo al añadir reseña", "ERROR", JOptionPane.ERROR_MESSAGE);
+        }
     }//GEN-LAST:event_btnSubmitResenaActionPerformed
+
+    private void FiltroOrdenaComboActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_FiltroOrdenaComboActionPerformed
+        String seleccion = (String) FiltroOrdenaCombo.getSelectedItem();
+        if (seleccion.equals("Riesgo")) {
+            cargarTablaRutasRiesgo();
+        } else if (seleccion.equals("Duracion")) {
+            cargarTablaRutasDuracion();
+        }else if(seleccion.equals("Distancia")){
+            cargarTablaRutasDuracion();
+        }
+    }//GEN-LAST:event_FiltroOrdenaComboActionPerformed
 
     /**
      * @param args the command line arguments
@@ -1519,18 +1544,18 @@ public class PantallaPrincipal extends javax.swing.JFrame {
     }
 
     public void cargarTablaRutas() {
-        LinkedList<Ruta> listarutas = rutas.rutasValidadas();
+        ArrayList<Ruta> listarutas = rutas.rutasValidadas();
         TablaRutas.removeAll();
         String[] columnas = {"ID", "Nombre", "Distancia", "Duracion", "Clasificacion", "Nivel de riesgo", "Nivel de esfuerzo", "Desnivel acumulado", "Tipo de terreno", "Valoracion media"};
         DefaultTableModel modelo = new DefaultTableModel(columnas, 0);
         TablaRutas.setModel(modelo);
+        TablaRutas.getColumnModel().getColumn(0).setMinWidth(0);
+        TablaRutas.getColumnModel().getColumn(0).setMaxWidth(0);
+        TablaRutas.getColumnModel().getColumn(0).setWidth(0);
         for (Ruta r : listarutas) {
             String[] datos = {String.valueOf(r.getId_ruta()), r.getNombre(), String.valueOf(r.getDistancia_total()), String.valueOf(r.getDuracion()), r.getClasificacion().toString(),
                 String.valueOf(r.getNivel_riesgo()), String.valueOf(r.getNivel_esfuerzo()), String.valueOf(r.getDesnivel_acumulado()),
                 String.valueOf(r.getTipo_terreno()), String.valueOf(r.getValoracion_media())};
-            TablaRutas.getColumnModel().getColumn(0).setMinWidth(0);
-            TablaRutas.getColumnModel().getColumn(0).setMaxWidth(0);
-            TablaRutas.getColumnModel().getColumn(0).setWidth(0);
             modelo.addRow(datos);
         }
 
@@ -1542,13 +1567,13 @@ public class PantallaPrincipal extends javax.swing.JFrame {
         String[] columnas = {"ID", "Nombre", "Distancia", "Duracion", "Clasificacion", "Nivel de riesgo", "Nivel de esfuerzo", "Desnivel acumulado", "Tipo de terreno", "Valoracion media"};
         DefaultTableModel modelo = new DefaultTableModel(columnas, 0);
         TablaRutasNoValidadas.setModel(modelo);
+        TablaRutasNoValidadas.getColumnModel().getColumn(0).setMinWidth(0);
+        TablaRutasNoValidadas.getColumnModel().getColumn(0).setMaxWidth(0);
+        TablaRutasNoValidadas.getColumnModel().getColumn(0).setWidth(0);
         for (Ruta r : noValidadas) {
             String[] datos = {String.valueOf(r.getId_ruta()), r.getNombre(), String.valueOf(r.getDistancia_total()), String.valueOf(r.getDuracion()), r.getClasificacion().toString(),
                 String.valueOf(r.getNivel_riesgo()), String.valueOf(r.getNivel_esfuerzo()), String.valueOf(r.getDesnivel_acumulado()),
-                String.valueOf(r.getTipo_terreno()), String.valueOf(r.getValoracion_media())};
-            TablaRutasNoValidadas.getColumnModel().getColumn(0).setMinWidth(0);
-            TablaRutasNoValidadas.getColumnModel().getColumn(0).setMaxWidth(0);
-            TablaRutasNoValidadas.getColumnModel().getColumn(0).setWidth(0);
+                String.valueOf(r.getTipo_terreno()), String.valueOf(r.getValoracion_media())};;
             modelo.addRow(datos);
         }
     }
@@ -1559,20 +1584,73 @@ public class PantallaPrincipal extends javax.swing.JFrame {
         String[] columnas = {"Nombre", "Apellidos", "Fecha de nacimiento", "Rol del usuario"};
         DefaultTableModel modelo = new DefaultTableModel(columnas, 0);
         TablaUsuarios.setModel(modelo);
+        TablaUsuarios.getColumnModel().getColumn(0).setMinWidth(0);
+        TablaUsuarios.getColumnModel().getColumn(0).setMaxWidth(0);
+        TablaUsuarios.getColumnModel().getColumn(0).setWidth(0);
         for (Usuario usu : noValidados) {
             String[] datos = {String.valueOf(usu.getId()), usu.getNombre(), usu.getApellidos(), usu.getFecha_nac().toString(), usu.getRol().toString()};
             modelo.addRow(datos);
-            TablaUsuarios.getColumnModel().getColumn(0).setMinWidth(0);
-            TablaUsuarios.getColumnModel().getColumn(0).setMaxWidth(0);
-            TablaUsuarios.getColumnModel().getColumn(0).setWidth(0);
         }
+    }
 
+    public void cargarTablaRutasRiesgo() {
+        ArrayList<Ruta> rutasPorRiesgo = rutas.rutasValidadas();
+        rutasPorRiesgo.sort(Comparator.comparingInt(Ruta::getNivel_riesgo));
+        TablaRutas.removeAll();
+        String[] columnas = {"ID", "Nombre", "Distancia", "Duracion", "Clasificacion", "Nivel de riesgo", "Nivel de esfuerzo", "Desnivel acumulado", "Tipo de terreno", "Valoracion media"};
+        DefaultTableModel modelo = new DefaultTableModel(columnas, 0);
+        TablaRutas.setModel(modelo);
+        TablaRutas.getColumnModel().getColumn(0).setMinWidth(0);
+        TablaRutas.getColumnModel().getColumn(0).setMaxWidth(0);
+        TablaRutas.getColumnModel().getColumn(0).setWidth(0);
+        for (Ruta r : rutasPorRiesgo) {
+            String[] datos = {String.valueOf(r.getId_ruta()), r.getNombre(), String.valueOf(r.getDistancia_total()), String.valueOf(r.getDuracion()), r.getClasificacion().toString(),
+                String.valueOf(r.getNivel_riesgo()), String.valueOf(r.getNivel_esfuerzo()), String.valueOf(r.getDesnivel_acumulado()),
+                String.valueOf(r.getTipo_terreno()), String.valueOf(r.getValoracion_media())};
+            modelo.addRow(datos);
+        }
+    }
+
+    public void cargarTablaRutasDuracion() {
+        ArrayList<Ruta> rutasPorDuracion = rutas.rutasValidadas();
+        rutasPorDuracion.sort(Comparator.comparingInt(Ruta::getDuracion));
+        TablaRutas.removeAll();
+        String[] columnas = {"ID", "Nombre", "Distancia", "Duracion", "Clasificacion", "Nivel de riesgo", "Nivel de esfuerzo", "Desnivel acumulado", "Tipo de terreno", "Valoracion media"};
+        DefaultTableModel modelo = new DefaultTableModel(columnas, 0);
+        TablaRutas.setModel(modelo);
+        TablaRutas.getColumnModel().getColumn(0).setMinWidth(0);
+        TablaRutas.getColumnModel().getColumn(0).setMaxWidth(0);
+        TablaRutas.getColumnModel().getColumn(0).setWidth(0);
+        for (Ruta r : rutasPorDuracion) {
+            String[] datos = {String.valueOf(r.getId_ruta()), r.getNombre(), String.valueOf(r.getDistancia_total()), String.valueOf(r.getDuracion()), r.getClasificacion().toString(),
+                String.valueOf(r.getNivel_riesgo()), String.valueOf(r.getNivel_esfuerzo()), String.valueOf(r.getDesnivel_acumulado()),
+                String.valueOf(r.getTipo_terreno()), String.valueOf(r.getValoracion_media())};
+            modelo.addRow(datos);
+        }
+    }
+    public void cargarTablaRutasDistancia(){
+         ArrayList<Ruta> rutasPorDistancia = rutas.rutasValidadas();
+        rutasPorDistancia.sort(Comparator.comparingInt(Ruta::getDistancia_total));
+        TablaRutas.removeAll();
+        String[] columnas = {"ID", "Nombre", "Distancia", "Duracion", "Clasificacion", "Nivel de riesgo", "Nivel de esfuerzo", "Desnivel acumulado", "Tipo de terreno", "Valoracion media"};
+        DefaultTableModel modelo = new DefaultTableModel(columnas, 0);
+        TablaRutas.setModel(modelo);
+        TablaRutas.getColumnModel().getColumn(0).setMinWidth(0);
+        TablaRutas.getColumnModel().getColumn(0).setMaxWidth(0);
+        TablaRutas.getColumnModel().getColumn(0).setWidth(0);
+        for (Ruta r : rutasPorDistancia) {
+            String[] datos = {String.valueOf(r.getId_ruta()), r.getNombre(), String.valueOf(r.getDistancia_total()), String.valueOf(r.getDuracion()), r.getClasificacion().toString(),
+                String.valueOf(r.getNivel_riesgo()), String.valueOf(r.getNivel_esfuerzo()), String.valueOf(r.getDesnivel_acumulado()),
+                String.valueOf(r.getTipo_terreno()), String.valueOf(r.getValoracion_media())};
+            modelo.addRow(datos);
+        }
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JComboBox<String> AccesibleCombo;
     private javax.swing.JComboBox<String> ClasificacionCombo;
     private javax.swing.JComboBox<String> FamiliarCombo;
+    private javax.swing.JComboBox<String> FiltroOrdenaCombo;
     private javax.swing.JComboBox<String> IndicacionesCombo;
     private javax.swing.JPanel PantallaCrearRuta;
     private javax.swing.JPanel PantallaMenu;
