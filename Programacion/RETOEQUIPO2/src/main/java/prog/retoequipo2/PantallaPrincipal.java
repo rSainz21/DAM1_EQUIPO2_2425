@@ -62,6 +62,7 @@ public class PantallaPrincipal extends javax.swing.JFrame {
         textPassword = new javax.swing.JPasswordField();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
+        jButton1 = new javax.swing.JButton();
         PantallaMenu = new javax.swing.JPanel();
         btnVerRuta2 = new javax.swing.JButton();
         btnCrearRuta = new javax.swing.JButton();
@@ -141,6 +142,7 @@ public class PantallaPrincipal extends javax.swing.JFrame {
         jScrollPane7 = new javax.swing.JScrollPane();
         txtResena = new javax.swing.JTextArea();
         btnSubmitResena = new javax.swing.JButton();
+        btnVolverReseña = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("VPrincipal");
@@ -165,23 +167,23 @@ public class PantallaPrincipal extends javax.swing.JFrame {
         PantallaPrinci.setLayout(PantallaPrinciLayout);
         PantallaPrinciLayout.setHorizontalGroup(
             PantallaPrinciLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(PantallaPrinciLayout.createSequentialGroup()
+                .addGap(247, 247, 247)
+                .addComponent(btnVerRutas, javax.swing.GroupLayout.PREFERRED_SIZE, 396, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(256, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, PantallaPrinciLayout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(btnIniciarSesion)
-                .addGap(75, 75, 75))
-            .addGroup(PantallaPrinciLayout.createSequentialGroup()
-                .addGap(220, 220, 220)
-                .addComponent(btnVerRutas, javax.swing.GroupLayout.PREFERRED_SIZE, 396, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(283, Short.MAX_VALUE))
+                .addGap(51, 51, 51))
         );
         PantallaPrinciLayout.setVerticalGroup(
             PantallaPrinciLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(PantallaPrinciLayout.createSequentialGroup()
-                .addGap(20, 20, 20)
+                .addGap(28, 28, 28)
                 .addComponent(btnIniciarSesion)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 220, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 202, Short.MAX_VALUE)
                 .addComponent(btnVerRutas, javax.swing.GroupLayout.PREFERRED_SIZE, 56, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(187, 187, 187))
+                .addGap(201, 201, 201))
         );
 
         btnVerRutas.getAccessibleContext().setAccessibleName("BtnVerRutas");
@@ -277,10 +279,17 @@ public class PantallaPrincipal extends javax.swing.JFrame {
         });
 
         textPassword.setText("jPasswordField1");
+        textPassword.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                textPasswordActionPerformed(evt);
+            }
+        });
 
         jLabel1.setText("Usuario");
 
         jLabel2.setText("Password");
+
+        jButton1.setText("jButton1");
 
         javax.swing.GroupLayout PantallaRegistroLayout = new javax.swing.GroupLayout(PantallaRegistro);
         PantallaRegistro.setLayout(PantallaRegistroLayout);
@@ -288,16 +297,17 @@ public class PantallaPrincipal extends javax.swing.JFrame {
             PantallaRegistroLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(PantallaRegistroLayout.createSequentialGroup()
                 .addGap(171, 171, 171)
-                .addGroup(PantallaRegistroLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(btnEnviarInicioSesion)
+                .addGroup(PantallaRegistroLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel2)
+                    .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 74, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(75, 75, 75)
+                .addGroup(PantallaRegistroLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                     .addGroup(PantallaRegistroLayout.createSequentialGroup()
-                        .addGroup(PantallaRegistroLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel2)
-                            .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 74, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(75, 75, 75)
-                        .addGroup(PantallaRegistroLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(textUsuario, javax.swing.GroupLayout.DEFAULT_SIZE, 271, Short.MAX_VALUE)
-                            .addComponent(textPassword))))
+                        .addComponent(jButton1)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 124, Short.MAX_VALUE)
+                        .addComponent(btnEnviarInicioSesion))
+                    .addComponent(textUsuario, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 271, Short.MAX_VALUE)
+                    .addComponent(textPassword, javax.swing.GroupLayout.Alignment.LEADING))
                 .addContainerGap(308, Short.MAX_VALUE))
         );
         PantallaRegistroLayout.setVerticalGroup(
@@ -312,7 +322,9 @@ public class PantallaPrincipal extends javax.swing.JFrame {
                     .addComponent(textPassword, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(40, 40, 40)
-                .addComponent(btnEnviarInicioSesion)
+                .addGroup(PantallaRegistroLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btnEnviarInicioSesion)
+                    .addComponent(jButton1))
                 .addContainerGap(158, Short.MAX_VALUE))
         );
 
@@ -773,7 +785,14 @@ public class PantallaPrincipal extends javax.swing.JFrame {
             }
         });
 
+        btnVolverValoracion.setBackground(new java.awt.Color(0, 204, 51));
+        btnVolverValoracion.setForeground(new java.awt.Color(255, 51, 51));
         btnVolverValoracion.setText("Volver");
+        btnVolverValoracion.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnVolverValoracionActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout PantallaValoracionLayout = new javax.swing.GroupLayout(PantallaValoracion);
         PantallaValoracion.setLayout(PantallaValoracionLayout);
@@ -858,18 +877,29 @@ public class PantallaPrincipal extends javax.swing.JFrame {
             }
         });
 
+        btnVolverReseña.setBackground(new java.awt.Color(102, 255, 255));
+        btnVolverReseña.setForeground(new java.awt.Color(255, 0, 255));
+        btnVolverReseña.setText("volver");
+        btnVolverReseña.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnVolverReseñaActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout PantallaResenaLayout = new javax.swing.GroupLayout(PantallaResena);
         PantallaResena.setLayout(PantallaResenaLayout);
         PantallaResenaLayout.setHorizontalGroup(
             PantallaResenaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, PantallaResenaLayout.createSequentialGroup()
                 .addContainerGap(262, Short.MAX_VALUE)
-                .addGroup(PantallaResenaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(btnSubmitResena)
+                .addComponent(jLabel25, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(34, 34, 34)
+                .addGroup(PantallaResenaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                     .addGroup(PantallaResenaLayout.createSequentialGroup()
-                        .addComponent(jLabel25, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(34, 34, 34)
-                        .addComponent(jScrollPane7, javax.swing.GroupLayout.PREFERRED_SIZE, 374, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(btnVolverReseña)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(btnSubmitResena))
+                    .addComponent(jScrollPane7, javax.swing.GroupLayout.PREFERRED_SIZE, 374, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(186, 186, 186))
         );
         PantallaResenaLayout.setVerticalGroup(
@@ -880,7 +910,9 @@ public class PantallaPrincipal extends javax.swing.JFrame {
                     .addComponent(jLabel25)
                     .addComponent(jScrollPane7, javax.swing.GroupLayout.PREFERRED_SIZE, 224, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(38, 38, 38)
-                .addComponent(btnSubmitResena)
+                .addGroup(PantallaResenaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btnSubmitResena)
+                    .addComponent(btnVolverReseña))
                 .addContainerGap(130, Short.MAX_VALUE))
         );
 
@@ -1483,6 +1515,98 @@ public class PantallaPrincipal extends javax.swing.JFrame {
     }
     }//GEN-LAST:event_btnSubmitResenaActionPerformed
 
+    private void textPasswordActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_textPasswordActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_textPasswordActionPerformed
+
+    private void btnVolverValoracionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVolverValoracionActionPerformed
+           if (user instanceof Administrador) {
+            PantallaPrinci.setVisible(false);
+            PantallaMenu.setVisible(false);
+            PantallaRegistro.setVisible(false);
+            PantallaVerRutas.setVisible(true);
+            PantallaValidarRutas.setVisible(false);
+            PantallaValidarUsuarios.setVisible(false);
+        } else if (user instanceof Profesor) {
+            PantallaPrinci.setVisible(false);
+            PantallaMenu.setVisible(false);
+            btnValidarUsuario.setVisible(false);
+            btnValidarRuta.setVisible(false);
+            btnBorrarRuta.setVisible(false);
+            PantallaRegistro.setVisible(false);
+            PantallaVerRutas.setVisible(true);
+            PantallaValidarRutas.setVisible(false);
+            PantallaValidarUsuarios.setVisible(false);
+        } else if (user instanceof Disenador_rutas) {
+            PantallaPrinci.setVisible(false);
+            PantallaMenu.setVisible(false);
+            btnValidarUsuario.setVisible(false);
+            btnValidarRuta.setVisible(false);
+            btnBorrarRuta.setVisible(false);
+            btnCrearCalendar.setVisible(false);
+            PantallaRegistro.setVisible(false);
+            PantallaVerRutas.setVisible(true);
+            PantallaValidarRutas.setVisible(false);
+            PantallaValidarUsuarios.setVisible(false);
+        } else if (user instanceof Alumno) {
+            PantallaPrinci.setVisible(false);
+            PantallaMenu.setVisible(false);
+            btnValidarUsuario.setVisible(false);
+            btnValidarRuta.setVisible(false);
+            btnBorrarRuta.setVisible(false);
+            btnCrearCalendar.setVisible(false);
+            btnDescargarFicha.setVisible(false);
+            PantallaRegistro.setVisible(false);
+            PantallaVerRutas.setVisible(true);
+            PantallaValidarRutas.setVisible(false);
+            PantallaValidarUsuarios.setVisible(false);
+        }
+    }//GEN-LAST:event_btnVolverValoracionActionPerformed
+
+    private void btnVolverReseñaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVolverReseñaActionPerformed
+           if (user instanceof Administrador) {
+            PantallaPrinci.setVisible(false);
+            PantallaMenu.setVisible(false);
+            PantallaRegistro.setVisible(false);
+            PantallaVerRutas.setVisible(true);
+            PantallaValidarRutas.setVisible(false);
+            PantallaValidarUsuarios.setVisible(false);
+        } else if (user instanceof Profesor) {
+            PantallaPrinci.setVisible(false);
+            PantallaMenu.setVisible(false);
+            btnValidarUsuario.setVisible(false);
+            btnValidarRuta.setVisible(false);
+            btnBorrarRuta.setVisible(false);
+            PantallaRegistro.setVisible(false);
+            PantallaVerRutas.setVisible(true);
+            PantallaValidarRutas.setVisible(false);
+            PantallaValidarUsuarios.setVisible(false);
+        } else if (user instanceof Disenador_rutas) {
+            PantallaPrinci.setVisible(false);
+            PantallaMenu.setVisible(false);
+            btnValidarUsuario.setVisible(false);
+            btnValidarRuta.setVisible(false);
+            btnBorrarRuta.setVisible(false);
+            btnCrearCalendar.setVisible(false);
+            PantallaRegistro.setVisible(false);
+            PantallaVerRutas.setVisible(true);
+            PantallaValidarRutas.setVisible(false);
+            PantallaValidarUsuarios.setVisible(false);
+        } else if (user instanceof Alumno) {
+            PantallaPrinci.setVisible(false);
+            PantallaMenu.setVisible(false);
+            btnValidarUsuario.setVisible(false);
+            btnValidarRuta.setVisible(false);
+            btnBorrarRuta.setVisible(false);
+            btnCrearCalendar.setVisible(false);
+            btnDescargarFicha.setVisible(false);
+            PantallaRegistro.setVisible(false);
+            PantallaVerRutas.setVisible(true);
+            PantallaValidarRutas.setVisible(false);
+            PantallaValidarUsuarios.setVisible(false);
+        }
+    }//GEN-LAST:event_btnVolverReseñaActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -1607,10 +1731,12 @@ public class PantallaPrincipal extends javax.swing.JFrame {
     private javax.swing.JButton btnVerRuta2;
     private javax.swing.JButton btnVerRutas;
     private javax.swing.JButton btnVolverCrearRuta;
+    private javax.swing.JButton btnVolverReseña;
     private javax.swing.JButton btnVolverValidaRutas;
     private javax.swing.JButton btnVolverValidaUsuario;
     private javax.swing.JButton btnVolverValoracion;
     private javax.swing.JButton btnVolverVerRutas;
+    private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
