@@ -27,12 +27,12 @@ CREATE TABLE IF NOT EXISTS `rutas_airelibre`.`usuarios` (
   `apellidos` VARCHAR(45) NOT NULL,
   `password` VARCHAR(50) NOT NULL,
   `fecha_nac` DATE NOT NULL,
-  `rol` ENUM('administrador', 'diseñador', 'profesor', 'alumno', 'usuario_registrado') NOT NULL,
+  `rol` ENUM('administrador', 'diseñador', 'profesor', 'alumno', 'invitado') NOT NULL,
   `validado` TINYINT NOT NULL,
   PRIMARY KEY (`cod_usu`),
   UNIQUE INDEX `email_UNIQUE` (`email` ASC) VISIBLE)
 ENGINE = InnoDB
-AUTO_INCREMENT = 5
+AUTO_INCREMENT = 7
 DEFAULT CHARACTER SET = utf8mb4
 COLLATE = utf8mb4_0900_ai_ci;
 
@@ -86,15 +86,16 @@ CREATE TABLE IF NOT EXISTS `rutas_airelibre`.`actividades` (
   `id_actividad` INT NOT NULL AUTO_INCREMENT,
   `nom_actividad` VARCHAR(25) NOT NULL,
   `descripcion` VARCHAR(125) NOT NULL,
-  `rutas_id_ruta` INT NULL DEFAULT NULL,
+  `rutas_id_ruta` INT NOT NULL,
   PRIMARY KEY (`id_actividad`),
   INDEX `fk_actividades_rutas1_idx` (`rutas_id_ruta` ASC) VISIBLE,
   CONSTRAINT `fk_actividades_rutas1`
     FOREIGN KEY (`rutas_id_ruta`)
     REFERENCES `rutas_airelibre`.`rutas` (`id_ruta`)
-    ON DELETE SET NULL
-    ON UPDATE SET NULL)
+    ON DELETE CASCADE
+    ON UPDATE CASCADE)
 ENGINE = InnoDB
+AUTO_INCREMENT = 3
 DEFAULT CHARACTER SET = utf8mb4
 COLLATE = utf8mb4_0900_ai_ci;
 
@@ -135,7 +136,7 @@ CREATE TABLE IF NOT EXISTS `rutas_airelibre`.`puntospeligro` (
   `num_orden` INT NOT NULL,
   `latitud` DOUBLE NOT NULL,
   `longitud` DOUBLE NOT NULL,
-  `timestamp` DATE NOT NULL,
+  `timestamp` DATETIME NOT NULL,
   `descripcion` TEXT NOT NULL,
   `km` DOUBLE NOT NULL,
   `nivel_gravedad` TINYINT NOT NULL,
@@ -149,7 +150,7 @@ CREATE TABLE IF NOT EXISTS `rutas_airelibre`.`puntospeligro` (
     ON DELETE CASCADE
     ON UPDATE CASCADE)
 ENGINE = InnoDB
-AUTO_INCREMENT = 2
+AUTO_INCREMENT = 4
 DEFAULT CHARACTER SET = utf8mb4
 COLLATE = utf8mb4_0900_ai_ci;
 
@@ -183,8 +184,8 @@ CREATE TABLE IF NOT EXISTS `rutas_airelibre`.`puntosinteres` (
   `num_orden` INT NOT NULL,
   `latitud` DOUBLE NOT NULL,
   `longitud` DOUBLE NOT NULL,
-  `timestamp` DATE NOT NULL,
-  `tipo` ENUM('histórico-arqueológico') NOT NULL,
+  `timestamp` DATETIME NOT NULL,
+  `tipo` ENUM('historico_arqueologico', 'naturaleza', 'mirador', 'area_de_descanso', 'punto_de_agua', 'refugio_alojamiento', 'cultural', 'geologico', 'fauna_especifica', 'botanico') NOT NULL,
   `descripcion` VARCHAR(125) NOT NULL,
   `caract_especiales` VARCHAR(125) NOT NULL,
   `rutas_id_ruta` INT NOT NULL,
@@ -196,6 +197,7 @@ CREATE TABLE IF NOT EXISTS `rutas_airelibre`.`puntosinteres` (
     ON DELETE CASCADE
     ON UPDATE CASCADE)
 ENGINE = InnoDB
+AUTO_INCREMENT = 3
 DEFAULT CHARACTER SET = utf8mb4
 COLLATE = utf8mb4_0900_ai_ci;
 
@@ -229,6 +231,7 @@ CREATE TABLE IF NOT EXISTS `rutas_airelibre`.`periodos` (
   `descrip` VARCHAR(125) NOT NULL,
   PRIMARY KEY (`id_periodo`))
 ENGINE = InnoDB
+AUTO_INCREMENT = 2
 DEFAULT CHARACTER SET = utf8mb4
 COLLATE = utf8mb4_0900_ai_ci;
 
@@ -238,7 +241,7 @@ COLLATE = utf8mb4_0900_ai_ci;
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `rutas_airelibre`.`resenas` (
   `id_resena` INT NOT NULL AUTO_INCREMENT,
-  `text_resena` VARCHAR(45) NOT NULL,
+  `text_resena` TEXT NOT NULL,
   `rutas_id_ruta` INT NOT NULL,
   `usuarios_cod_usu` INT NOT NULL,
   PRIMARY KEY (`id_resena`),
@@ -255,6 +258,7 @@ CREATE TABLE IF NOT EXISTS `rutas_airelibre`.`resenas` (
     ON DELETE CASCADE
     ON UPDATE CASCADE)
 ENGINE = InnoDB
+AUTO_INCREMENT = 9
 DEFAULT CHARACTER SET = utf8mb4
 COLLATE = utf8mb4_0900_ai_ci;
 
@@ -307,6 +311,7 @@ CREATE TABLE IF NOT EXISTS `rutas_airelibre`.`valoraciones` (
     ON DELETE CASCADE
     ON UPDATE CASCADE)
 ENGINE = InnoDB
+AUTO_INCREMENT = 3
 DEFAULT CHARACTER SET = utf8mb4
 COLLATE = utf8mb4_0900_ai_ci;
 
