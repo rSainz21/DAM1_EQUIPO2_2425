@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?xml-stylesheet type="text/xsl" href="gpx-a-html.xsl"?>
+<gpx version="1.1" creator="ChatGPT" xmlns="http://www.topografix.com/GPX/1/1">
+  <metadata>
+    <name>Ruta de ejemplo</name>
+    <desc>Ruta sencilla con 3 puntos en Madrid</desc>
+    <author>
+      <name>Usuario</name>
+    </author>
+  </metadata>
+  
+  <trk>
+    <name>Paseo por el centro</name>
+    <trkseg>
+      <trkpt lat="40.4168" lon="-3.7038">
+        <ele>650</ele>
+        <time>2025-05-15T09:00:00Z</time>
+      </trkpt>
+      <trkpt lat="40.4175" lon="-3.7042">
+        <ele>653</ele>
+        <time>2025-05-15T09:10:00Z</time>
+      </trkpt>
+      <trkpt lat="40.4180" lon="-3.7050">
+        <ele>655</ele>
+        <time>2025-05-15T09:20:00Z</time>
+      </trkpt>
+    </trkseg>
+  </trk>
+</gpx>
