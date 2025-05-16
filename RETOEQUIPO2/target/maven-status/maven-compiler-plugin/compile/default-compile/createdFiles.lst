@@ -27,6 +27,7 @@ prog\retoequipo2\PantallaPrincipal$4.class
 prog\retoequipo2\PantallaPrincipal$23.class
 prog\retoequipo2\RETOEQUIPO2.class
 prog\retoequipo2\TIPO.class
+prog\retoequipo2\PantallaPrincipal$29.class
 prog\retoequipo2\Disenador_rutas.class
 prog\retoequipo2\Calendario.class
 prog\retoequipo2\Imagen.class
@@ -40,6 +41,7 @@ prog\retoequipo2\PantallaPrincipal$12.class
 prog\retoequipo2\PantallaPrincipal$22.class
 prog\retoequipo2\Puntos_ruta.class
 prog\retoequipo2\MetodosDAO.class
+prog\retoequipo2\ImportCSV.class
 prog\retoequipo2\RutasDAO.class
 prog\retoequipo2\PantallaPrincipal$3.class
 prog\retoequipo2\PantallaPrincipal$6.class
@@ -47,6 +49,7 @@ prog\retoequipo2\PantallaPrincipal$21.class
 prog\retoequipo2\Administrador.class
 prog\retoequipo2\ExportCSV.class
 prog\retoequipo2\PantallaPrincipal$25.class
+prog\retoequipo2\PantallaPrincipal$30.class
 prog\retoequipo2\PantallaPrincipal$10.class
 prog\retoequipo2\PantallaPrincipal$16.class
 prog\retoequipo2\PantallaPrincipal$28.class

@@ -29,22 +29,17 @@ public class ExportCSV {
 
                 writer.write("\nTipoRegistro,Latitud,Longitud,Timestamp\n");
                 for (Puntos_ruta punto : ruta.getPuntos_ruta()) {
-                    if(punto instanceof Punto_peligro){
-                    Punto_peligro peligro=(Punto_peligro) punto;
+                    if(punto instanceof Punto_peligro peligro){
                     writer.write("PuntoPeligro," + peligro.getLatitud() + "," + peligro.getLongitud() + "," + peligro.getTimestamp() 
                             + peligro.getKm() + "," + peligro.getNivel_gravedad() + "," + peligro.getDescripcion_gravedad() +"\n");
                     }
-                    else if(punto instanceof Punto_interes){
-                    Punto_interes interes=(Punto_interes) punto;
+                    else if(punto instanceof Punto_interes interes){
                     writer.write("PuntoInteres," + interes.getLatitud() + "," + interes.getLongitud() + "," + interes.getTimestamp()
                             + interes.getTipo()+","+interes.getCaract_especiales()+"\n");
                     }
                 
                 }
 
-                
-                 
-            
             
             } catch (IOException e) {
                 System.out.println(e.getMessage() + "\nError al escribir en el archivo");
