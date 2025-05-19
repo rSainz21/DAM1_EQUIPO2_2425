@@ -203,8 +203,8 @@ public class RutasDAO {
         return noValidadas;
     }
     
-    public LinkedList<Ruta> rutasValidadas() {
-        LinkedList<Ruta> validadas = new LinkedList<>();
+    public ArrayList<Ruta> rutasValidadas() {
+        ArrayList<Ruta> validadas = new ArrayList<>();
         String sql = "SELECT * FROM rutas WHERE estado_ruta_validada=TRUE;";
         try (Statement stt = conn.createStatement(); ResultSet rs = stt.executeQuery(sql)) {
             while (rs.next()) {

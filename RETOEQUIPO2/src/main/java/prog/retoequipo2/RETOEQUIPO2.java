@@ -19,53 +19,37 @@ public class RETOEQUIPO2 {
         RutasDAO rutasss = new RutasDAO();
         UsuarioDAO usuariosss = new UsuarioDAO();
         MetodosDAO metodosss = new MetodosDAO();
-        Alumno usu1 = new Alumno(5, "rubencio@gmail.com", "ruben", "cobo", "pass", LocalDate.parse("1994-02-24"));
-        if (usuariosss.insertaUsuario(usu1)) {
-            System.out.println("Usuario insertado");
-        }
-        Administrador usu2 = new Administrador(6, "hola@hola", "marco", "materazzi", "1234", LocalDate.parse("1994-02-24"));
-        if (usuariosss.insertaUsuario(usu2)) {
-            System.out.println("Usuario insertado");
-        }
-        /* Ruta ruta = new Ruta("El toral", LocalDate.parse("1998-12-12"), 22.22, 44.44, 44.44, 22.22, 345, 456, 55.65, 65.87, CLASIFICACION.circular, 300, 4, 3, true, true, "suputamadre.com",
+        Alumno usu1 = new Alumno(1, "rubencio@gmail.com", "ruben", "cobo", "pass", LocalDate.parse("1994-02-24"));
+        /*//if(usuariosss.insertaUsuario(usu1)){
+         //System.out.println("Usuario insertado");
+        //}
+        Administrador usu2 = new Administrador(4, "hola@hola", "marco", "materazzi", "1234", LocalDate.parse("1994-02-24"));
+        //if(usuariosss.insertaUsuario(usu2)){
+         //System.out.println("Usuario insertado");
+        //}
+        */Ruta ruta = new Ruta("El toral", LocalDate.parse("1998-12-12"), 22.22, 44.44, 44.44, 22.22, 345, 456, 55.65, 65.87, CLASIFICACION.circular, 300, 4, 3, true, true, "suputamadre.com",
                 "lleva una rebequita por si refresca", "Sri lanka", usu1);
-        if (rutasss.insertarRuta(ruta)) {
-            System.out.println("Ruta insertada");
-        }
+        //if (rutasss.insertarRuta(ruta)) {
+          //  System.out.println("Ruta insertada");
+        //}
         Ruta ruta1 = new Ruta("Los puentes", LocalDate.parse("1998-12-12"), 22.22, 44.44, 44.44, 22.22, 345, 456, 55.65, 65.87, CLASIFICACION.lineal, 300, 4, 3, true, true, "suputamadre.com",
                 "lleva una rebequita por si refresca", "Sri lanka", usu1);
-        if (rutasss.insertarRuta(ruta1)) {
-            System.out.println("Ruta insertada");
-        }
-        
-         */
-        Ruta ruta2 = rutasss.obtenerRutaPorId(14);
-
-        Usuario usu3 = usuariosss.obtenerUsuarioCreador(14);
-        System.out.println(usu2);
+        //if (rutasss.insertarRuta(ruta1)) {
+          //  System.out.println("Ruta insertada");
+        //}
+        Ruta ruta2 = rutasss.obtenerRutaPorId(3);
+        Usuario usu3 = usuariosss.obtenerUsuarioCreador(1);
+        //System.out.println(usu2);
         Punto_peligro pi = new Punto_peligro(1, "puntoprueba", LocalDateTime.now(), 22, 33, "hola", 37264, 5, "mu peligrosu");
-        if (metodosss.insertarPuntoPeligro(pi, ruta2)) {
-            System.out.println("punto insertado");
-        }
+        //if (metodosss.insertarPuntoPeligro(pi, ruta2)) {
+          //  System.out.println("punto insertado");
+        //}
 
-        // prueba export CSV
-        
-        Ruta ruta3 = new Ruta("hola", LocalDate.parse("2000-12-12"), 22.22, 44.44, 44.44, 22.22, 345, 456, 55.65, 65.87, CLASIFICACION.lineal, 300, 4, 3, true, true, "hola.com",
-                "hola es mi primera ruta", "España", usu1);
-        if (rutasss.insertarRuta(ruta3)) {
-            System.out.println("Ruta insertada");
+        Actividad actividad=new Actividad("hiking","14km de ruta por el monte");
+        if(metodosss.insertarActividad(actividad, ruta2)){
+            System.out.println("Actividad insertada");
         }
-        
-        Punto_peligro pie = new Punto_peligro(14, "puntopeligroso", LocalDateTime.now(), 22, 33, "hola", 37264, 5, "hola, punto peligroso1");
-        Punto_interes pie2 = new Punto_interes(14, "puntointeresante", LocalDateTime.now(), 22, 33, TIPO.cultural, "adios", "hola");
-        if (metodosss.insertarPuntoPeligro(pie, ruta2)) {
-            System.out.println("punto peligro insertado");
-        }
-        if (metodosss.insertarPuntoInteres(pie2, ruta2)) {
-            System.out.println("punto interes insertado");
-        }
-        String archivoCSV = "ruta_exportada.csv";
-        ExportCSV.exportarRuta(ruta2, archivoCSV);
+        Periodo periodo=new Periodo("Verano","Epoca de calor");
 
     }
 }

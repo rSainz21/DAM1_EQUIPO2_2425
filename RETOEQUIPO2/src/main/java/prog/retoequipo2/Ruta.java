@@ -40,11 +40,15 @@ public class Ruta {
     private TreeSet<Puntos_ruta> puntos_ruta;
     private LinkedList<Resena> resenas;
     private LinkedList<Valoracion> valoraciones;
+    private LinkedList<Periodo> periodos;
+    private LinkedList<Actividad> actividades;
 
     public Ruta(int id_ruta, String nombre, LocalDate fecha, double longitud_ini, double latitud_ini, double longitud_fin, double latitud_fin, int distancia_total, int duracion, double latitud_max, double longitud_max, CLASIFICACION clasificacion, int desnivel_acumulado, int tipo_terreno, int indicaciones, boolean accesible_inclusivo, boolean familiar, String url_gpx, String recomendaciones, String zona_geografica, Usuario creador) {
         puntos_ruta = new TreeSet<>();
         resenas = new LinkedList<>();
         valoraciones = new LinkedList<>();
+        periodos = new LinkedList<>();
+        actividades = new LinkedList<>();
         this.id_ruta = id_ruta;
         this.nombre = nombre;
         this.fecha = fecha;
@@ -62,7 +66,7 @@ public class Ruta {
         this.desnivel_acumulado = desnivel_acumulado;
         this.tipo_terreno = tipo_terreno;
         this.indicaciones = indicaciones;
-        this.actividad =new Actividad();
+        this.actividad = new Actividad();
         this.periodo = new Periodo();
         this.accesible_inclusivo = accesible_inclusivo;
         this.familiar = familiar;
@@ -78,6 +82,8 @@ public class Ruta {
         puntos_ruta = new TreeSet<>();
         resenas = new LinkedList<>();
         valoraciones = new LinkedList<>();
+        periodos = new LinkedList<>();
+        actividades = new LinkedList<>();
         this.nombre = nombre;
         this.fecha = fecha;
         this.longitud_ini = longitud_ini;
@@ -94,7 +100,7 @@ public class Ruta {
         this.desnivel_acumulado = desnivel_acumulado;
         this.tipo_terreno = tipo_terreno;
         this.indicaciones = indicaciones;
-        this.actividad =new Actividad();
+        this.actividad = new Actividad();
         this.periodo = new Periodo();
         this.accesible_inclusivo = accesible_inclusivo;
         this.familiar = familiar;
@@ -350,13 +356,13 @@ public class Ruta {
     private int calcularRiesgo() {
         int riesgo = 0;
         int riesgoAcumulado = 0;
-        int pps=0;
+        int pps = 0;
         if (!puntos_ruta.isEmpty()) {
             for (Puntos_ruta p : puntos_ruta) {
-                if(p instanceof Punto_peligro){
-                riesgoAcumulado += ((Punto_peligro) p).getNivel_gravedad();
-                pps++;
-            }
+                if (p instanceof Punto_peligro) {
+                    riesgoAcumulado += ((Punto_peligro) p).getNivel_gravedad();
+                    pps++;
+                }
             }
             riesgo = Math.round((float) riesgoAcumulado / pps);
         }
@@ -455,7 +461,6 @@ public class Ruta {
         return borrado;
     }
 
-
     public boolean borraResena(Resena resena) {
         boolean borrada = false;
         if (this.resenas.contains(resena)) {
@@ -464,12 +469,13 @@ public class Ruta {
         }
         return borrada;
     }
-        public boolean borraValoracion(Valoracion valo) {
+
+    public boolean borraValoracion(Valoracion valo) {
         boolean borrada = false;
         if (this.valoraciones.contains(valo)) {
             valoraciones.remove(valo);
             borrada = true;
         }
         return borrada;
-    } 
+    }
 }
