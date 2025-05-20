@@ -125,6 +125,7 @@ public class RutasDAO {
                                 CLASIFICACION.valueOf(rs.getString("clasificacion")), rs.getInt("desnivel_acumulado"), rs.getInt("tipo_terreno"), rs.getInt("indicaciones"),
                                 rs.getBoolean("accesib_inclusiv"), rs.getBoolean("familiar"), rs.getString("url_gpx"), rs.getString("recomendaciones"),
                                 rs.getString("zona_geografica"), usu);
+                        ruta.setValoracion_media(rs.getDouble("valo_media"));
                         if (!rutas.add(ruta)) {
                             throw new Exception("fallo al insertar ruta en la lista");
                         }
@@ -281,6 +282,7 @@ public class RutasDAO {
                         CLASIFICACION.valueOf(rs.getString("clasificacion")), rs.getInt("desnivel_acumulado"), rs.getInt("tipo_terreno"), rs.getInt("indicaciones"),
                         rs.getBoolean("accesib_inclusiv"), rs.getBoolean("familiar"), rs.getString("url_gpx"), rs.getString("recomendaciones"),
                         rs.getString("zona_geografica"), usu);
+                ruta.setValoracion_media(rs.getDouble("valo_media"));
                 validadas.add(ruta);
             }
         } catch (SQLException ex) {
