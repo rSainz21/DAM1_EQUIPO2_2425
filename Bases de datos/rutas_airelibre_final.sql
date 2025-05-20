@@ -317,7 +317,7 @@ CREATE TABLE `rutas` (
   PRIMARY KEY (`id_ruta`),
   KEY `fk_rutas_usuarios1_idx` (`usuarios_cod_usu`),
   CONSTRAINT `fk_rutas_usuarios1` FOREIGN KEY (`usuarios_cod_usu`) REFERENCES `usuarios` (`cod_usu`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=16 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_as_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=18 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_as_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -326,7 +326,7 @@ CREATE TABLE `rutas` (
 
 LOCK TABLES `rutas` WRITE;
 /*!40000 ALTER TABLE `rutas` DISABLE KEYS */;
-INSERT INTO `rutas` VALUES (14,'El toral','1998-12-12',44.44,22.22,22.22,44.44,345,300,55.65,65.87,456,'circular',4,5,7,3,1,1,'suputamadre.com',1,'lleva una rebequita por si refresca','Sri lanka',3.33,5),(15,'Los puentes','1998-12-12',44.44,22.22,22.22,44.44,345,300,55.65,65.87,456,'lineal',4,0,7,3,1,1,'suputamadre.com',0,'lleva una rebequita por si refresca','Sri lanka',0,5);
+INSERT INTO `rutas` VALUES (14,'El toral','1998-12-12',44.44,22.22,22.22,44.44,345,300,55.65,65.87,456,'circular',4,5,7,3,1,1,'suputamadre.com',1,'lleva una rebequita por si refresca','Sri lanka',3.33,5),(15,'Los puentes','1998-12-12',44.44,22.22,22.22,44.44,345,300,55.65,65.87,456,'lineal',4,0,7,3,1,1,'suputamadre.com',0,'lleva una rebequita por si refresca','Sri lanka',0,5),(16,'Ruta del bacalao','2025-05-20',96.96,69.69,43.34,34.43,619,800,99.99,66.66,230,'circular',3,0,8,4,0,1,'google.com',1,'llevar un palo por si hay lobos','Polaciones',0,6),(17,'Ruta 66','2025-05-20',96.96,69.69,43.34,34.43,25,10,99.99,66.66,56,'lineal',3,0,4,4,1,0,'google.com',1,'papardos fuera','La mies',0,6);
 /*!40000 ALTER TABLE `rutas` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!50003 SET @saved_cs_client      = @@character_set_client */ ;
@@ -511,4 +511,4 @@ DELIMITER ;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2025-05-20 15:20:14
+-- Dump completed on 2025-05-20 17:23:34
