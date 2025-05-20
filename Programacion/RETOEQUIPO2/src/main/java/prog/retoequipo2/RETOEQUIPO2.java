@@ -16,14 +16,14 @@ public class RETOEQUIPO2 {
     public static void main(String[] args) {
         //hola ruben
        ConexionBD conexion = ConexionBD.getInstance();
-       /* RutasDAO rutasss = new RutasDAO();
+        RutasDAO rutasss = new RutasDAO();
         UsuarioDAO usuariosss = new UsuarioDAO();
         MetodosDAO metodosss = new MetodosDAO();
-        Alumno usu1 = new Alumno(5, "rubencio@gmail.com", "ruben", "cobo", "pass", LocalDate.parse("1994-02-24"));
+        Alumno usu1 = new Alumno(7, "rubencio@gmail.com", "ruben", "cobo", "pass", LocalDate.parse("1994-02-24"));
         //if(usuariosss.insertaUsuario(usu1)){
          //System.out.println("Usuario insertado");
         //}
-        Administrador usu2 = new Administrador(6, "hola@hola", "marco", "materazzi", "1234", LocalDate.parse("1994-02-24"));
+        Administrador usu2 = new Administrador(8, "hola@hola", "marco", "materazzi", "1234", LocalDate.parse("1994-02-24"));
         //if(usuariosss.insertaUsuario(usu2)){
          //System.out.println("Usuario insertado");
         //}
@@ -37,8 +37,8 @@ public class RETOEQUIPO2 {
         //if (rutasss.insertarRuta(ruta1)) {
           //  System.out.println("Ruta insertada");
         //}
-        Ruta ruta2 = rutasss.obtenerRutaPorId(14);
-        Usuario usu3 = usuariosss.obtenerUsuarioCreador(15);
+        Ruta ruta2 = rutasss.obtenerRutaPorId(18);
+        Usuario usu3 = usuariosss.obtenerUsuarioCreador(19);
         System.out.println(usu2);
         Punto_peligro pi = new Punto_peligro(1, "puntoprueba", LocalDateTime.now(), 22, 33, "hola", 37264, 5, "mu peligrosu");
         //if (metodosss.insertarPuntoPeligro(pi, ruta2)) {
@@ -55,7 +55,7 @@ public class RETOEQUIPO2 {
         for(Periodo p:periodos){
             System.out.println(p.getNom_periodo());
         }
-*/
+
        PantallaPrincipal app=new PantallaPrincipal();
         app.setVisible(true);
     }

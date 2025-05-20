@@ -106,6 +106,7 @@ public class Ruta {
         this.validada = false;
         this.recomendaciones = recomendaciones;
         this.zona_geografica = zona_geografica;
+        this.valoracion_media=0;
         this.creador = creador;
     }
          /**
@@ -163,7 +164,7 @@ public class Ruta {
         this.validada = false;
         this.recomendaciones = recomendaciones;
         this.zona_geografica = zona_geografica;
-        this.valoracion_media = calcularValoMedia();
+        this.valoracion_media=0;
         this.creador = creador;
 
     }
